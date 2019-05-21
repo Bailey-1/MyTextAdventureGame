@@ -2,79 +2,100 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <sstream>
 
 #include "Game.h"
 #include "Player.h"
+#include "Tile.h"
 
 void Game::start(void)
 {
+	Tile A("A", "A Tile", "A tile map thing");
+
+	Player player;
+	std::cout << "What is the name of your hero? ";
+	std::string name;
+	std::cin >> name;
+	player.setName(name);
+	player.setLocation(A);
+	player.stats();
+
 	int x, y;
-	char map[3][4] =
+	char map[4][4] =
 	{
 		{'A','B','C','D'},
 		{'E','F','G','H'},
-		{'I','J','K','L'}
+		{'I','J','K','L'},
+		{'M','N','O','P'}
 	};
 
 	x = 0;
 	y = 0;
-
 	play(map, x, y);
 }
 
-void Game::play(char map[3][4], int x, int y)
+void Game::play(char map[4][4], int x , int y)
 {
-	Player player;
-	player.stats();
+	int answer;
 
+	std::cout << map[x][y] << std::endl;
 
-	std::string answer;
+	std::cout << "What do you do?" << std::endl;
 
-	bool isRunning = true;
-	while (isRunning == true)
+	std::cout << "[1] Move" << std::endl;
+	std::cout << "[2] Player" << std::endl;
+	std::cout << "[3] Inventory" << std::endl;
+	std::cout << "[4] " << std::endl;
+	std::cout << "[5] Move" << std::endl;
+
+	std::cin >> answer;
+
+	switch (answer)
 	{
-		std::cout << "What do you do?" << std::endl;
-		std::cin >> answer;
+		case 1:
+			playerMove(map, x, y);
+			break;
+		case 2:
+			std::cout << "Player" << std::endl;
+			break;
+		case 3:
+			std::cout << "Inventory" << std::endl;
+			break;
 
-		std::transform(answer.begin(), answer.end(), answer.begin(), ::tolower);
-		std::cout << answer;
-		/*
-		if (answer == "w" || answer == "A" || answer == "s" || answer == "d")
-		{
-			char answerChar = answer[0];
-			playerMove(map, x, y, answerChar);
-		}
-		*/
+		default:
+			std::cout << "Suck my ass" << std::endl;
 	}
 }
 
-void Game::playerMove(char map[3][4], int x, int y, char input)
+void Game::playerMove(char map[4][4], int x, int y)
 {
 	int error = 0;
+	char input;
 
-	std::cout << "You are currently at location " << map[y][x];
+	std::cout << "You are currently at location " << map[y][x] << std::endl;
 
+	std::cout << "Which direction do you want to go?" << std::endl;
+	std::cin >> input; 
 
 	switch (input)
 	{
-	case 'w':
-		y = y - 1;
+		case 'w':
+			y = y - 1;
+			break;
+		case 's':
+			y = y + 1;
+			break;
+		case 'd':
+			x = x + 1;
+			break;
+		case 'a':
+			x = x - 1;
+			break;
+		case '\n':
+			break;
+		default:
+			error = 1;
 		break;
-	case 's':
-		y = y + 1;
-		break;
-	case 'd':
-		x = x + 1;
-		break;
-	case 'a':
-		x = x - 1;
-		break;
-	case '\n':
-		break;
-	default:
-		error = 1;
-		break;
-
 	}
 
 	if (x < 0 || y < 0 || x >(4 - 1) || y >(3 - 1))
@@ -89,5 +110,21 @@ void Game::playerMove(char map[3][4], int x, int y, char input)
 	if (error == 1)
 		std::cout << "YOU CAN'T GO THAT WAY!" << std::endl;
 
+	std::cout << "You are at " << map[x][y] << std::endl;
 	play(map, x, y);
+}
+
+void Game::move()
+{
+	
+}
+
+void Game::player()
+{
+
+}
+
+void Game::inventory()
+{
+
 }

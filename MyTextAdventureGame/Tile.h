@@ -16,5 +16,8 @@ public:
 	void setName(std::string name);
 	std::string getDescription(void);
 	void setDescription(std::string m_Name);
+
+	Tile(void);
+	Tile(std::string, std::string, std::string);
 };
 
