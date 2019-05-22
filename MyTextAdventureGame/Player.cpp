@@ -8,8 +8,13 @@ std::string Player::getName(void) { return m_name; }
 void Player::setName(std::string name) { m_name = name; }
 int Player::getHealth(void) { return m_health; }
 void Player::setHealth(int health) { m_health = health; }
+
+int Player::getLevel(void) { return m_level; }
+void Player::setLevel(int level) { m_level = level; }
 int Player::getGold(void) { return m_gold; }
 void Player::setGold(int gold) { m_gold = gold; }
+int Player::getXp(void) { return m_xp; }
+void Player::setXp(int xp) { m_xp = xp; }
 
 Item Player::getWeapon(void) { return m_weapon; }
 void Player::setWeapon(Item weapon) { m_weapon = weapon; }
@@ -17,6 +22,11 @@ void Player::setWeapon(Item weapon) { m_weapon = weapon; }
 std::string Player::getLocationName(void) { return m_location.getName(); }
 std::string Player::getLocationDescription(void) { return m_location.getDescription(); }
 void Player::setLocation(Tile location) { m_location = location; }
+
+int Player::getX(void) { return m_x; }
+void Player::setX(int x) { m_x = x; }
+int Player::getY(void) { return m_y; }
+void Player::setY(int y) { m_y = y; }
 
 void Player::stats(void)
 {
@@ -34,6 +44,7 @@ Player::Player(void)
 {
 	setHealth(100);
 	setGold(0);
+	setXp(0);
 }
 
 int Player::Battle(Enemy baddie)
@@ -63,9 +74,9 @@ int Player::Battle(Enemy baddie)
 		std::cout << "==================================================" << std::endl;
 		std::cout << "Name: " << getName() << std::endl;
 		std::cout << "Health: " << getHealth() << std::endl;
-		std::cout << "=====" << std::endl;
+		std::cout << "=========" << std::endl;
 		std::cout << " VS" << std::endl;
-		std::cout << "=====" << std::endl;
+		std::cout << "=========" << std::endl;
 		std::cout << "Name: " << baddie.getName() << std::endl;
 		std::cout << "Health: " << baddie.getHealth() << std::endl;
 		std::cout << "==================================================" << std::endl;
@@ -76,7 +87,7 @@ int Player::Battle(Enemy baddie)
 		srand(time(0));
 
 		int isPlayerFirst = rand() % 2;
-		std::cout << isPlayerFirst << std::endl;
+		//std::cout << isPlayerFirst << std::endl;
 
 		isPlayerFirst = 1; //ALWAYS FIRST MAYBE CHANGE THIS LATER.
 

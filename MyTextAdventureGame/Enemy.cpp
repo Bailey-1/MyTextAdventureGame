@@ -15,10 +15,6 @@ void Enemy::setDamage(int damage) { m_damage = damage; }
 Item Enemy::getWeapon(void) { return m_weapon; }
 void Enemy::setWeapon(Item weapon) { m_weapon = weapon; }
 
-std::string Enemy::getLocationName(void) { return m_location.getName(); }
-std::string Enemy::getLocationDescription(void) { return m_location.getDescription(); }
-void Enemy::setLocation(Tile location) { m_location = location; }
-
 Enemy::Enemy(void)
 {
 	setName("Test");

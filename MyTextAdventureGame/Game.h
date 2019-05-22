@@ -1,16 +1,19 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "Player.h"
 
 class Game
 {
 protected:
-	void play(std::string map[7][7], int x, int y);
-	void playerMove(std::string map[7][7], int x, int y);
+	void play(std::string map[7][7], Player player);
+	void playerMove(std::string map[7][7], Player player);
 
-	void move();
-	void player();
-	void inventory();
+	void move(void);
+	void player(void);
+	void inventory(void);
+
+	void intro(void);
 
 public:
 	void start(void);
