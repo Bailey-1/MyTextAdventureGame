@@ -14,6 +14,7 @@ protected:
 	Tile m_location;
 	Item m_weapon;
 
+
 public:
 	std::string getName(void);
 	void setName(std::string);

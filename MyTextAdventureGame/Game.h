@@ -5,15 +5,12 @@
 class Game
 {
 protected:
-	void play(char map[3][4], int x, int y);
-	void playerMove(char map[3][4], int x, int y);
+	void play(std::string map[7][7], int x, int y);
+	void playerMove(std::string map[7][7], int x, int y);
 
 	void move();
 	void player();
 	void inventory();
-
-	void battle();
-
 
 public:
 	void start(void);

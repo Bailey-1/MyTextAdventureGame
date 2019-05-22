@@ -21,12 +21,16 @@ void Game::start(void)
 	player.stats();
 
 	int x, y;
-	char map[4][4] =
+
+	std::string map[7][7] =
 	{
-		{'A','B','C','D'},
-		{'E','F','G','H'},
-		{'I','J','K','L'},
-		{'M','N','O','P'}
+		{"AAA","   ","BBB","   ","CCC","   ","DDD"},
+		{"   ","   ","   ","   ","   ","   ","   "},
+		{"EEE","   ","FFF","   ","GGG","   ","HHH"},
+		{"   ","   ","   ","   ","   ","   ","   "},
+		{"III","   ","JJJ","   ","KKK","   ","LLL"},
+		{"   ","   ","   ","   ","   ","   ","   "},
+		{"MMM","   ","NNN","   ","OOO","   ","PPP"}
 	};
 
 	x = 0;
@@ -34,11 +38,11 @@ void Game::start(void)
 	play(map, x, y);
 }
 
-void Game::play(char map[4][4], int x , int y)
+void Game::play(std::string map[7][7], int x , int y)
 {
 	int answer;
 
-	std::cout << map[x][y] << std::endl;
+	std::cout << "Current Location: " << map[y][x] << std::endl;
 
 	std::cout << "What do you do?" << std::endl;
 
@@ -46,7 +50,7 @@ void Game::play(char map[4][4], int x , int y)
 	std::cout << "[2] Player" << std::endl;
 	std::cout << "[3] Inventory" << std::endl;
 	std::cout << "[4] " << std::endl;
-	std::cout << "[5] Move" << std::endl;
+	std::cout << "[5] Help" << std::endl;
 
 	std::cin >> answer;
 
@@ -67,29 +71,38 @@ void Game::play(char map[4][4], int x , int y)
 	}
 }
 
-void Game::playerMove(char map[4][4], int x, int y)
+void Game::playerMove(std::string map[7][7], int x, int y)
 {
+	
 	int error = 0;
 	char input;
 
-	std::cout << "You are currently at location " << map[y][x] << std::endl;
+	//std::cout << "You are currently at location " << map[y][x] << std::endl;
 
 	std::cout << "Which direction do you want to go?" << std::endl;
-	std::cin >> input; 
+	std::cout << "[N] North" << std::endl;
+	std::cout << "[E] East" << std::endl;
+	std::cout << "[S] South" << std::endl;
+	std::cout << "[W] West" << std::endl;
+	std::cout << " " << std::endl;
+	std::cout << "[Q] Quit" << std::endl;
+	std::cin >> input;
 
 	switch (input)
 	{
 		case 'w':
-			y = y - 1;
+			y = y - 2;
 			break;
 		case 's':
-			y = y + 1;
+			y = y + 2;
 			break;
 		case 'd':
-			x = x + 1;
+			x = x + 2;
 			break;
 		case 'a':
-			x = x - 1;
+			x = x - 2;
+			break;
+		case 'q':
 			break;
 		case '\n':
 			break;
@@ -98,11 +111,11 @@ void Game::playerMove(char map[4][4], int x, int y)
 		break;
 	}
 
-	if (x < 0 || y < 0 || x >(4 - 1) || y >(3 - 1))
+	if (x < 0 || y < 0 || x >(7 - 1) || y >(7 - 1))
 	{
-		x = (x > (4 - 1)) ? (4 - 1) : x;
+		x = (x > (7 - 1)) ? (7 - 1) : x;
 		x = (x < 0) ? 0 : x;
-		y = (y > (3 - 1)) ? (3 - 1) : y;
+		y = (y > (7 - 1)) ? (7 - 1) : y;
 		y = (y < 0) ? 0 : y;
 		error = 1;
 	}
@@ -110,13 +123,13 @@ void Game::playerMove(char map[4][4], int x, int y)
 	if (error == 1)
 		std::cout << "YOU CAN'T GO THAT WAY!" << std::endl;
 
-	std::cout << "You are at " << map[x][y] << std::endl;
+	//std::cout << "You are at " << map[y][x] << std::endl;
 	play(map, x, y);
 }
 
 void Game::move()
 {
-	
+
 }
 
 void Game::player()

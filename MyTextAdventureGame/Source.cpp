@@ -67,7 +67,7 @@ int main()
 			playGame = false;
 			break;
 		case 5:
-			player.setHealth(10);
+			player.setHealth(100);
 			isBaddieDead = player.Battle(baddie);
 			std::cout << "IS THE BADDIE DEAD " << isBaddieDead << std::endl;
 			system("pause");

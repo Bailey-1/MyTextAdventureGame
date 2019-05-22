@@ -1,0 +1,57 @@
+# depslib dependency file v1.0
+1558437436 source:f:\mytextadventuregame\mytextadventuregame\enemy.cpp
+	"Enemy.h"
+	<iostream>
+	<string>
+
+1558437438 f:\mytextadventuregame\mytextadventuregame\enemy.h
+	<iostream>
+	<string>
+	"Tile.h"
+	"Item.h"
+
+1558454007 f:\mytextadventuregame\mytextadventuregame\tile.h
+	<iostream>
+	<string>
+
+1556911930 f:\mytextadventuregame\mytextadventuregame\item.h
+	<iostream>
+	<string>
+
+1556911979 source:f:\mytextadventuregame\mytextadventuregame\item.cpp
+	"Item.h"
+	<iostream>
+	<string>
+
+1550488693 source:f:\mytextadventuregame\mytextadventuregame\meme.cpp
+
+1558455163 source:f:\mytextadventuregame\mytextadventuregame\player.cpp
+	"Player.h"
+	<iostream>
+	<string>
+	<cstdlib>
+	<ctime>
+
+1558443319 f:\mytextadventuregame\mytextadventuregame\player.h
+	<iostream>
+	<string>
+	"Tile.h"
+	"Item.h"
+	"Enemy.h"
+
+1558461759 source:f:\mytextadventuregame\mytextadventuregame\source.cpp
+	<cstdlib>
+	<iostream>
+	<string>
+	"Game.h"
+	"Player.h"
+
+1558003087 f:\mytextadventuregame\mytextadventuregame\game.h
+	<iostream>
+	<string>
+
+1557830847 source:f:\mytextadventuregame\mytextadventuregame\tile.cpp
+	"Tile.h"
+	<iostream>
+	<string>
+
