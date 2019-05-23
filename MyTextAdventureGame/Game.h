@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Player.h"
+#include "Locations.h"
 
 class Game
 {
@@ -12,6 +13,8 @@ protected:
 	void move(void);
 	void player(void);
 	void inventory(void);
+
+	Locations validLocations;
 
 	void intro(void);
 

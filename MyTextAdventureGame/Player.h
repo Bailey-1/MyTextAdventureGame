@@ -39,9 +39,6 @@ public:
 	int getY(void);
 	void setY(int);
 
-	Enemy getEnemy(void);
-	void setEnemy(Enemy);
-
 	int Battle(Enemy);
 
 	Item getWeapon(void);
@@ -52,7 +49,7 @@ public:
 	std::string getLocationName(void);
 	std::string getLocationDescription(void);
 	void setLocation(Tile);
-
+	Tile getLocation(void);
 	void stats(void);
 
 	Player(void);

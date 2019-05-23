@@ -119,6 +119,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Locations.cpp" />
     <ClCompile Include="Meme.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Locations.h" />
     <ClInclude Include="Meme.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Tile.h" />

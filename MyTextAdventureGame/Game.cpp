@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "Player.h"
 #include "Tile.h"
+#include "Locations.h"
 
 void Game::start(void)
 {
@@ -27,13 +28,13 @@ void Game::start(void)
 
 	std::string map[7][7] =
 	{
-		{"AAA","XXX","BBB","   ","CCC","XXX","DDD"},
-		{"   ","   ","   ","   ","   ","   ","   "},
-		{"EEE","XXX","FFF","XXX","GGG","   ","HHH"},
-		{"   ","   ","   ","   ","XXX","   ","   "},
-		{"III","   ","JJJ","XXX","KKK","   ","LLL"},
-		{"   ","   ","XXX","   ","   ","   ","XXX"},
-		{"MMM","   ","NNN","   ","OOO","   ","PPP"}
+		{"A","X"," "," ","C","X","D"},
+		{" "," "," "," "," "," "," "},
+		{"E","X","F","X","G"," ","H"},
+		{" "," "," "," ","X"," "," "},
+		{"I"," ","J","X","K"," ","L"},
+		{" "," ","X"," "," "," ","X"},
+		{"M"," ","N"," ","O"," ","P"}
 	};
 
 	/*
@@ -59,8 +60,9 @@ void Game::play(std::string map[7][7], Player player)
 {
 	int answer;
 	std::cout << "Current Location: " << map[player.getY()][player.getX()] << std::endl;
-	std::cout << "Location Name: " << player.getLocationName() << std::endl;
-	std::cout << "Location Description: " << player.getLocationDescription() << std::endl;
+	//std::cout << "Location ID: "<< std::endl;
+	std::cout << "Location Name: " << player.getLocation.getLocationName() << std::endl;
+	std::cout << "Location Description: " << player.getLocation.getLocationDescription() << std::endl;
 
 	std::cout << " " << std::endl;
 	std::cout << "What do you do?" << std::endl;
@@ -164,6 +166,12 @@ void Game::playerMove(std::string map[7][7], Player player)
 	{
 		player.setX(x);
 		player.setY(y);
+
+		if (map[player.getY()][player.getX()] == "AAA")
+		{
+			player.setLocation(validLocations.A);
+			std::cout << "Stop" << std::endl;
+		}
 	}
 
 	//std::cout << "You are at " << map[y][x] << std::endl;
