@@ -1,4 +1,4 @@
- #include "Player.h"
+#include "Player.h"
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -19,10 +19,6 @@ void Player::setXp(int xp) { m_xp = xp; }
 Item Player::getWeapon(void) { return m_weapon; }
 void Player::setWeapon(Item weapon) { m_weapon = weapon; }
 
-std::string Player::getLocationName(void) { return m_location.getName(); }
-std::string Player::getLocationDescription(void) { return m_location.getDescription(); }
-void Player::setLocation(Tile location) { m_location = location; }
-
 int Player::getX(void) { return m_x; }
 void Player::setX(int x) { m_x = x; }
 int Player::getY(void) { return m_y; }
@@ -35,8 +31,11 @@ void Player::stats(void)
 	std::cout << "==================================================" << std::endl;
 	std::cout << "Name: " << getName() << std::endl;
 	std::cout << "Health: " << getHealth() << std::endl;
-	std::cout << "Gold: " << getGold () << std::endl;
-	std::cout << "Location: " << getLocationName() << std::endl;
+	std::cout << "Gold: " << getGold() << std::endl;
+
+	std::cout << "XP: " << getXp() << std::endl;
+	std::cout << "Level: " << getLevel() << std::endl;
+	std::cout << "Location: " << m_currentLocation.getName() << std::endl;
 	std::cout << "==================================================" << std::endl;
 }
 
@@ -45,6 +44,7 @@ Player::Player(void)
 	setHealth(100);
 	setGold(0);
 	setXp(0);
+	setLevel(0);
 }
 
 int Player::Battle(Enemy baddie)

@@ -1,8 +1,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include <algorithm>
-#include <sstream>
 
 #include "Game.h"
 #include "Player.h"
@@ -19,7 +17,7 @@ void Game::start(void)
 	std::string name;
 	std::cin >> name;
 	player.setName(name);
-	player.setLocation(A);
+	player.m_currentLocation = A;
 	player.stats();
 
 	std::cout << " " << std::endl;
@@ -28,7 +26,7 @@ void Game::start(void)
 
 	std::string map[7][7] =
 	{
-		{"A","X"," "," ","C","X","D"},
+		{"A","X","B"," ","C","X","D"},
 		{" "," "," "," "," "," "," "},
 		{"E","X","F","X","G"," ","H"},
 		{" "," "," "," ","X"," "," "},
@@ -61,8 +59,8 @@ void Game::play(std::string map[7][7], Player player)
 	int answer;
 	std::cout << "Current Location: " << map[player.getY()][player.getX()] << std::endl;
 	//std::cout << "Location ID: "<< std::endl;
-	std::cout << "Location Name: " << player.getLocation.getLocationName() << std::endl;
-	std::cout << "Location Description: " << player.getLocation.getLocationDescription() << std::endl;
+	std::cout << "Location Name: " << player.m_currentLocation.getName() << std::endl;
+	std::cout << "Location Description: " << player.m_currentLocation.getDescription() << std::endl;
 
 	std::cout << " " << std::endl;
 	std::cout << "What do you do?" << std::endl;
@@ -77,29 +75,29 @@ void Game::play(std::string map[7][7], Player player)
 
 	switch (answer)
 	{
-		case 1:
-			system("cls");
-			playerMove(map, player);
-			break;
-		case 2:
-			std::cout << "Player" << std::endl;
-			break;
-		case 3:
-			std::cout << "Inventory" << std::endl;
-			break;
-		case 4:
-			std::cout << "Interact With Location" << std::endl;
-			break;
-		case 5:
-			std::cout << "Help" << std::endl;
-			break;
+	case 1:
+		system("cls");
+		playerMove(map, player);
+		break;
+	case 2:
+		std::cout << "Player" << std::endl;
+		break;
+	case 3:
+		std::cout << "Inventory" << std::endl;
+		break;
+	case 4:
+		std::cout << "Interact With Location" << std::endl;
+		break;
+	case 5:
+		std::cout << "Help" << std::endl;
+		break;
 
-		default:
-			std::cout << "INVALID OPTION: Please try again!" << std::endl;
-			system("pause");
-			
-			play(map, player);
-			break;
+	default:
+		std::cout << "INVALID OPTION: Please try again!" << std::endl;
+		system("pause");
+
+		play(map, player);
+		break;
 	}
 }
 
@@ -107,6 +105,8 @@ void Game::playerMove(std::string map[7][7], Player player)
 {
 	int error = 0;
 	char input;
+
+	Tile prevLocation = player.m_currentLocation;
 
 	int x = player.getX();
 	int y = player.getY();
@@ -126,24 +126,24 @@ void Game::playerMove(std::string map[7][7], Player player)
 
 	switch (input)
 	{
-		case 'w':
-			y = y - 2;
-			break;
-		case 's':
-			y = y + 2;
-			break;
-		case 'd':
-			x = x + 2;
-			break;
-		case 'a':
-			x = x - 2;
-			break;
-		case 'q':
-			break;
-		case '\n':
-			break;
-		default:
-			error = 1;
+	case 'w':
+		y = y - 2;
+		break;
+	case 's':
+		y = y + 2;
+		break;
+	case 'd':
+		x = x + 2;
+		break;
+	case 'a':
+		x = x - 2;
+		break;
+	case 'q':
+		break;
+	case '\n':
+		break;
+	default:
+		error = 1;
 		break;
 	}
 
@@ -169,9 +169,14 @@ void Game::playerMove(std::string map[7][7], Player player)
 
 		if (map[player.getY()][player.getX()] == "AAA")
 		{
-			player.setLocation(validLocations.A);
+			player.m_currentLocation = validLocations.A;
 			std::cout << "Stop" << std::endl;
 		}
+	}
+
+	if (player.m_currentLocation.getName() != player.m_prevLocation.getName())
+	{
+		player.m_prevLocation = prevLocation;
 	}
 
 	//std::cout << "You are at " << map[y][x] << std::endl;

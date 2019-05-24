@@ -16,6 +16,7 @@ protected:
 	int m_xp;
 
 	Tile m_location;
+	
 	Item m_weapon;
 
 	int m_x;
@@ -44,14 +45,10 @@ public:
 	Item getWeapon(void);
 	void setWeapon(Item);
 
-	
+	Tile m_prevLocation;
+	Tile m_currentLocation;
 
-	std::string getLocationName(void);
-	std::string getLocationDescription(void);
-	void setLocation(Tile);
-	Tile getLocation(void);
 	void stats(void);
 
 	Player(void);
 };
-

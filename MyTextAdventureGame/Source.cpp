@@ -3,9 +3,9 @@
 #include <string>
 
 #include "Game.h"
-
 #include "Player.h"
 
+void leaderboards(void);
 void credits(void);
 
 int main()
@@ -46,17 +46,17 @@ int main()
 		std::cout << "==================================================" << std::endl;
 		std::cout << "Answer: ";
 		std::cin >> answer;
-		
+
 		system("cls");
 
 		switch (answer)
 		{
 		case 1:
 			game.start();
-			
+
 			break;
 		case 2:
-			std::cout << "Coming soon" << std::endl;
+			leaderboards();
 			system("pause");
 			break;
 		case 3:
@@ -79,6 +79,15 @@ int main()
 		system("cls");
 	}
 	return 0;
+}
+
+void leaderboards() {
+	std::cout << "==================================================" << std::endl;
+	std::cout << "               The Adventure Quest                " << std::endl;
+	std::cout << "==================================================" << std::endl;
+	std::cout << "Leaderboards:\n" << std::endl;
+	std::cout << "Coming Soon" << std::endl;
+	std::cout << "==================================================" << std::endl;
 }
 
 void credits() {

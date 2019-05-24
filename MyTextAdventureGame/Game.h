@@ -10,7 +10,6 @@ protected:
 	void play(std::string map[7][7], Player player);
 	void playerMove(std::string map[7][7], Player player);
 
-	void move(void);
 	void player(void);
 	void inventory(void);
 
