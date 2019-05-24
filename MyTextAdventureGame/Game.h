@@ -12,6 +12,8 @@ protected:
 
 	void player(void);
 	void inventory(void);
+	void interact(void);
+	void help(void);
 
 	Locations validLocations;
 

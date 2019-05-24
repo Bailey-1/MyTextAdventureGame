@@ -1,21 +1,19 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "Item.h"
 
 class Inventory
 {
 protected:
-	std::string items[5];
+	Item m_items[5];
 	int m_size;
-	std::string m_name;
 
 public:
-	std::string getName(void);
-	void setName(std::string);
+	Item getItems(void);
+	void setItems(Item);
+
 	int getSize(void);
 	void setSize(int);
-	
-	std::string getItems(void);
-	void setItems(std::string[]);
 };
 

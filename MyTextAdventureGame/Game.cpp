@@ -18,6 +18,11 @@ void Game::start(void)
 	std::cin >> name;
 	player.setName(name);
 	player.m_currentLocation = A;
+
+	Item items[5];
+
+	player.inventory.setItems(*items);
+	player.inventory.setSize(0);
 	player.stats();
 
 	std::cout << " " << std::endl;
@@ -183,21 +188,30 @@ void Game::playerMove(std::string map[7][7], Player player)
 	play(map, player);
 }
 
-/*
-void Game::move()
-{
-
-}
-*/
-
 void Game::player()
 {
-
+	//Where the player can chose to do things such as view information about them? Maybe remove this?
 }
 
 void Game::inventory()
 {
+	//Where the player can view what they have in their inventory.
+	//- Move Items.
+	//- Remove Items.
+	//- Info about items.
+}
 
+void Game::interact()
+{
+	//Where the player will bee able to chose to interact with the room:
+	//- Pickup items in room.
+	//- Start a battle with a enermy.
+	//- Read writing on a wall or in a diary/book.?
+}
+
+void Game::help()
+{
+	//Display information about how the game works etc.
 }
 
 void Game::intro()

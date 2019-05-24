@@ -4,6 +4,7 @@
 #include "Tile.h"
 #include "Item.h"
 #include "Enemy.h"
+#include "Inventory.h"
 
 class Player
 {
@@ -16,7 +17,7 @@ protected:
 	int m_xp;
 
 	Tile m_location;
-	
+
 	Item m_weapon;
 
 	int m_x;
@@ -41,6 +42,8 @@ public:
 	void setY(int);
 
 	int Battle(Enemy);
+
+	Inventory inventory;
 
 	Item getWeapon(void);
 	void setWeapon(Item);
