@@ -8,6 +8,8 @@ class Locations
 protected:
 	
 public:
+	std::string intro;
+
 	Tile A;
 	Tile B;
 	Tile C;

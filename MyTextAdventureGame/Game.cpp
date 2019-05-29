@@ -10,14 +10,12 @@
 void Game::start(void)
 {
 	intro();
-	Tile A("A", "A Tile", "A tile map thing");
 
 	Player player;
 	std::cout << "What is the name of your hero? ";
 	std::string name;
 	std::cin >> name;
 	player.setName(name);
-	player.m_currentLocation = A;
 
 	Item items[5];
 
@@ -27,7 +25,6 @@ void Game::start(void)
 
 	std::cout << " " << std::endl;
 	system("pause");
-	system("cls");
 
 	std::string map[7][7] =
 	{
@@ -39,22 +36,10 @@ void Game::start(void)
 		{" "," ","X"," "," "," ","X"},
 		{"M"," ","N"," ","O"," ","P"}
 	};
-
-	/*
-	std::string map[7][7] =
-	{
-		{"North-West","XXX","BBB","   ","CCC","XXX","North-East"},
-		{"   ","   ","   ","   ","   ","   ","   "},
-		{"EEE","XXX","Beginning","XXX","GGG","   ","HHH"},
-		{"   ","   ","   ","   ","XXX","   ","   "},
-		{"III","   ","JJJ","XXX","KKK","   ","LLL"},
-		{"   ","   ","XXX","   ","   ","   ","XXX"},
-		{"South-West","   ","NNN","   ","OOO","   ","South-East"}
-	};
-	*/
-
-	player.setX(0);
-	player.setY(0);
+	
+	player.setX(2);
+	player.setY(2);
+	player.m_currentLocation = validLocations.F;
 
 	play(map, player);
 }
@@ -62,6 +47,7 @@ void Game::start(void)
 void Game::play(std::string map[7][7], Player player)
 {
 	int answer;
+	system("cls");
 	std::cout << "Current Location: " << map[player.getY()][player.getX()] << std::endl;
 	//std::cout << "Location ID: "<< std::endl;
 	std::cout << "Location Name: " << player.m_currentLocation.getName() << std::endl;
@@ -85,10 +71,11 @@ void Game::play(std::string map[7][7], Player player)
 		playerMove(map, player);
 		break;
 	case 2:
-		std::cout << "Player" << std::endl;
+		playerOptions(map, player);
 		break;
 	case 3:
 		std::cout << "Inventory" << std::endl;
+		inventory(map, player);
 		break;
 	case 4:
 		std::cout << "Interact With Location" << std::endl;
@@ -113,16 +100,18 @@ void Game::playerMove(std::string map[7][7], Player player)
 
 	Tile prevLocation = player.m_currentLocation;
 
-	int x = player.getX();
 	int y = player.getY();
+	int x = player.getX();
+	int testY = player.getY();
+	int testX = player.getX();
 
-	//std::cout << "You are currently at location " << map[y][x] << std::endl;
-
+	std::cout << "Current Location: " << map[player.getY()][player.getX()] << std::endl;
+	std::cout << " " << std::endl;
 	std::cout << "Which direction do you want to go?" << std::endl;
-	std::cout << "[N] North" << std::endl;
-	std::cout << "[E] East" << std::endl;
+	std::cout << "[W] North" << std::endl;
+	std::cout << "[D] East" << std::endl;
 	std::cout << "[S] South" << std::endl;
-	std::cout << "[W] West" << std::endl;
+	std::cout << "[A] West" << std::endl;
 	std::cout << " " << std::endl;
 	std::cout << "[Q] Quit" << std::endl;
 	std::cin >> input;
@@ -133,15 +122,35 @@ void Game::playerMove(std::string map[7][7], Player player)
 	{
 	case 'w':
 		y = y - 2;
+		if (map[player.getY() - 1][player.getX()] == "X")
+		{
+			std::cout << "A large wall blocks your way." << std::endl;
+			error = 1;
+		}
 		break;
 	case 's':
 		y = y + 2;
+		if (map[player.getY() + 1][player.getX()] == "X")
+		{
+			std::cout << "A large wall blocks your way." << std::endl;
+			error = 1;
+		}
 		break;
 	case 'd':
 		x = x + 2;
+		if (map[player.getY()][player.getX() + 1] == "X")
+		{
+			std::cout << "A large wall blocks your way." << std::endl;
+			error = 1;
+		}
 		break;
 	case 'a':
 		x = x - 2;
+		if (map[player.getY()][player.getX() - 1] == "X")
+		{
+			std::cout << "A large wall blocks your way." << std::endl;
+			error = 1;
+		}
 		break;
 	case 'q':
 		break;
@@ -166,58 +175,252 @@ void Game::playerMove(std::string map[7][7], Player player)
 		std::cout << "==========================" << std::endl;
 		std::cout << "= YOU CAN'T GO THAT WAY! =" << std::endl;
 		std::cout << "==========================" << std::endl;
+		system("pause");
 	}
 	else
 	{
 		player.setX(x);
 		player.setY(y);
 
-		if (map[player.getY()][player.getX()] == "AAA")
+		//Probably a nicer way to do this but idk
+		if (map[player.getY()][player.getX()] == "A")
 		{
 			player.m_currentLocation = validLocations.A;
-			std::cout << "Stop" << std::endl;
 		}
+		else if (map[player.getY()][player.getX()] == "B")
+		{
+			player.m_currentLocation = validLocations.B;
+		}
+		else if (map[player.getY()][player.getX()] == "C")
+		{
+			player.m_currentLocation = validLocations.C;
+		}
+		else if (map[player.getY()][player.getX()] == "D")
+		{
+			player.m_currentLocation = validLocations.D;
+		}
+		else if (map[player.getY()][player.getX()] == "E")
+		{
+			player.m_currentLocation = validLocations.E;
+		}
+		else if (map[player.getY()][player.getX()] == "F")
+		{
+			player.m_currentLocation = validLocations.F;
+		}
+		else if (map[player.getY()][player.getX()] == "G")
+		{
+			player.m_currentLocation = validLocations.G;
+		}
+		else if (map[player.getY()][player.getX()] == "H")
+		{
+			player.m_currentLocation = validLocations.H;
+		}
+		else if (map[player.getY()][player.getX()] == "I")
+		{
+			player.m_currentLocation = validLocations.I;
+		}
+		else if (map[player.getY()][player.getX()] == "J")
+		{
+			player.m_currentLocation = validLocations.J;
+		}
+		else if (map[player.getY()][player.getX()] == "K")
+		{
+			player.m_currentLocation = validLocations.K;
+		}
+		else if (map[player.getY()][player.getX()] == "L")
+		{
+			player.m_currentLocation = validLocations.L;
+		}
+		else if (map[player.getY()][player.getX()] == "M")
+		{
+			player.m_currentLocation = validLocations.M;
+		}
+		else if (map[player.getY()][player.getX()] == "N")
+		{
+			player.m_currentLocation = validLocations.N;
+		}
+		else if (map[player.getY()][player.getX()] == "O")
+		{
+			player.m_currentLocation = validLocations.O;
+		}
+		else if (map[player.getY()][player.getX()] == "P")
+		{
+			player.m_currentLocation = validLocations.P;
+		}
+		//gross isnt it.
 	}
 
 	if (player.m_currentLocation.getName() != player.m_prevLocation.getName())
 	{
 		player.m_prevLocation = prevLocation;
 	}
-
 	//std::cout << "You are at " << map[y][x] << std::endl;
 	play(map, player);
 }
 
-void Game::player()
+void Game::playerOptions(std::string map[7][7], Player player)
 {
+	std::string newName;
+	system("cls");
 	//Where the player can chose to do things such as view information about them? Maybe remove this?
+	std::cout << "What do you want to do?" << std::endl;
+	std::cout << "[1] View Stats" << std::endl;
+	std::cout << "[2] Change Name" << std::endl;
+	std::cout << "[3] Save Game" << std::endl;
+	std::cout << " " << std::endl;
+	std::cout << "[Q] Quit" << std::endl;
+	char answer;
+	std::cin >> answer;
+
+	switch (answer)
+	{
+	case '1':
+		player.stats();
+		system("pause");
+		break;
+	case '2':
+		std::cout << "You are currently called \"" << player.getName() << "\"" << std::endl;
+		std::cout << "What would you like to be called?" << std::endl;
+		std::cin >> newName;
+		player.setName(newName);
+
+		std::cout << " " << std::endl;
+		std::cout << "You are now called \"" << player.getName() << "\"" << std::endl;
+		std::cout << " " << std::endl;
+		player.stats();
+		system("pause");
+		break;
+	case '3':
+		std::cout << "Coming soon!" << std::endl;
+		system("pause");
+		break;
+	case 'q':
+		break;
+	default:
+		std::cout << "Invalid Option" << std::endl;
+		std::cout << "Please try again" << std::endl;
+		system("pause");
+		playerOptions(map, player);
+
+	}
+	play(map, player);
 }
 
-void Game::inventory()
+void Game::inventory(std::string map[7][7], Player player)
 {
-	//Where the player can view what they have in their inventory.
-	//- Move Items.
-	//- Remove Items.
-	//- Info about items.
+	system("cls");
+	//Where the player can chose to do things such as view information about them? Maybe remove this?
+	std::cout << "What do you want to do?" << std::endl;
+	std::cout << "[1]" << std::endl;
+	std::cout << "[2]" << std::endl;
+	std::cout << "[3]" << std::endl;
+	std::cout << " " << std::endl;
+	std::cout << "[Q] Quit" << std::endl;
+	char answer;
+	std::cin >> answer;
+
+	switch (answer)
+	{
+	case '1':
+		//Null
+		break;
+	case '2':
+		//Null
+		break;
+	case '3':
+		//Null
+		break;
+	case 'q':
+		break;
+	default:
+		std::cout << "Invalid Option" << std::endl;
+		std::cout << "Please try again" << std::endl;
+		system("pause");
+		playerOptions(map, player);
+
+	}
+	play(map, player);
 }
 
-void Game::interact()
+void Game::interact(std::string map[7][7], Player player)
 {
 	//Where the player will bee able to chose to interact with the room:
 	//- Pickup items in room.
 	//- Start a battle with a enermy.
 	//- Read writing on a wall or in a diary/book.?
+
+	system("cls");
+	std::cout << "What do you want to do?" << std::endl;
+	std::cout << "[1]" << std::endl;
+	std::cout << "[2]" << std::endl;
+	std::cout << "[3]" << std::endl;
+	std::cout << " " << std::endl;
+	std::cout << "[Q] Quit" << std::endl;
+	char answer;
+	std::cin >> answer;
+
+	switch (answer)
+	{
+	case '1':
+		//Null
+		break;
+	case '2':
+		//Null
+		break;
+	case '3':
+		//Null
+		break;
+	case 'q':
+		break;
+	default:
+		std::cout << "Invalid Option" << std::endl;
+		std::cout << "Please try again" << std::endl;
+		system("pause");
+		playerOptions(map, player);
+
+	}
+	play(map, player);
 }
 
-void Game::help()
+void Game::help(std::string map[7][7], Player player)
 {
 	//Display information about how the game works etc.
+	system("cls");
+	std::cout << "What do you want to do?" << std::endl;
+	std::cout << "[1]" << std::endl;
+	std::cout << "[2]" << std::endl;
+	std::cout << "[3]" << std::endl;
+	std::cout << " " << std::endl;
+	std::cout << "[Q] Quit" << std::endl;
+	char answer;
+	std::cin >> answer;
+
+	switch (answer)
+	{
+	case '1':
+		//Null
+		break;
+	case '2':
+		//Null
+		break;
+	case '3':
+		//Null
+		break;
+	case 'q':
+		break;
+	default:
+		std::cout << "Invalid Option" << std::endl;
+		std::cout << "Please try again" << std::endl;
+		system("pause");
+		help(map, player);
+
+	}
+	play(map, player);
 }
 
 void Game::intro()
 {
 	std::cout << "The Beginning:" << std::endl;
-	std::cout << "What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills." << std::endl;
-	std::cout << " " << std::endl;
+	std::cout << validLocations.intro << std::endl;
 	system("pause");
 }

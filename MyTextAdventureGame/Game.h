@@ -10,11 +10,11 @@ protected:
 	void play(std::string map[7][7], Player player);
 	void playerMove(std::string map[7][7], Player player);
 
-	void player(void);
-	void inventory(void);
-	void interact(void);
-	void help(void);
-
+	void playerOptions(std::string map[7][7], Player player);
+	void inventory(std::string map[7][7], Player player);
+	void interact(std::string map[7][7], Player player);
+	void help(std::string map[7][7], Player player);
+	//std::string map[7][7];
 	Locations validLocations;
 
 	void intro(void);
