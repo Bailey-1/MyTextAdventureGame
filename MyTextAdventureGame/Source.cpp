@@ -11,7 +11,7 @@ void credits(void);
 int main()
 {
 	//Define stuff
-	int answer;
+	char answer;
 	bool playGame = true;
 	Game game;
 
@@ -46,27 +46,26 @@ int main()
 		std::cout << "==================================================" << std::endl;
 		std::cout << "Answer: ";
 		std::cin >> answer;
-
 		system("cls");
 
 		switch (answer)
 		{
-		case 1:
+		case '1':
 			game.start();
 
 			break;
-		case 2:
+		case '2':
 			leaderboards();
 			system("pause");
 			break;
-		case 3:
+		case '3':
 			credits();
 			system("pause");
 			break;
-		case 4:
+		case '4':
 			playGame = false;
 			break;
-		case 5:
+		case '5':
 			player.setHealth(100);
 			isBaddieDead = player.Battle(baddie);
 			std::cout << "IS THE BADDIE DEAD " << isBaddieDead << std::endl;

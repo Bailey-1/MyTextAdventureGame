@@ -13,7 +13,9 @@ public:
 	Item getItems(void);
 	void setItems(Item);
 
+	Item getItem(int);
+	void pickupItem(Item);
+
 	int getSize(void);
 	void setSize(int);
 };
-

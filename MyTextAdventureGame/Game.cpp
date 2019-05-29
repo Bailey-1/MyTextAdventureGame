@@ -41,12 +41,20 @@ void Game::start(void)
 	player.setY(2);
 	player.m_currentLocation = validLocations.F;
 
+	//Test
+	Item weapon;
+	weapon.setName("Dagger");
+	weapon.setDamage(10);
+
+	player.inventory.pickupItem(weapon);
+	player.inventory.pickupItem(weapon);
+
 	play(map, player);
 }
 
 void Game::play(std::string map[7][7], Player player)
 {
-	int answer;
+	char answer;
 	system("cls");
 	std::cout << "Current Location: " << map[player.getY()][player.getX()] << std::endl;
 	//std::cout << "Location ID: "<< std::endl;
@@ -66,21 +74,21 @@ void Game::play(std::string map[7][7], Player player)
 
 	switch (answer)
 	{
-	case 1:
+	case '1':
 		system("cls");
 		playerMove(map, player);
 		break;
-	case 2:
+	case '2':
 		playerOptions(map, player);
 		break;
-	case 3:
+	case '3':
 		std::cout << "Inventory" << std::endl;
 		inventory(map, player);
 		break;
-	case 4:
+	case '4':
 		std::cout << "Interact With Location" << std::endl;
 		break;
-	case 5:
+	case '5':
 		std::cout << "Help" << std::endl;
 		break;
 
@@ -311,21 +319,45 @@ void Game::inventory(std::string map[7][7], Player player)
 	system("cls");
 	//Where the player can chose to do things such as view information about them? Maybe remove this?
 	std::cout << "What do you want to do?" << std::endl;
-	std::cout << "[1]" << std::endl;
-	std::cout << "[2]" << std::endl;
-	std::cout << "[3]" << std::endl;
+	std::cout << "[1] View Inventory" << std::endl;
+	std::cout << "[2] View Information about item" << std::endl;
+	std::cout << "[3] Move items" << std::endl;
+	std::cout << "[4] Remove Item" << std::endl;
 	std::cout << " " << std::endl;
 	std::cout << "[Q] Quit" << std::endl;
 	char answer;
 	std::cin >> answer;
 
+	int itemchoice;
 	switch (answer)
 	{
 	case '1':
-		//Null
+		std::cout << "View Inventory" << std::endl;
+		for (int i = 0; i <= 4; i++)
+		{
+			std::cout << "[" << i+1 << "] " << player.inventory.getItem(i).getName() <<std::endl;
+		}
+		system("pause");
 		break;
 	case '2':
-		//Null
+		std::cout << "Information about Item" << std::endl;
+		for (int i = 0; i <= 4; i++)
+		{
+			std::cout << "[" << i + 1 << "] " << player.inventory.getItem(i).getName() << std::endl;
+		}
+		std::cout << "What item do you want to know more about?" << std::endl;
+		std::cin >> itemchoice;
+
+		if (player.inventory.getItem(itemchoice).getName() != "")
+		{
+			player.inventory.getItem(itemchoice).stats();
+			system("pause");
+		}
+		else
+		{
+			std::cout << "Invalid Option" << std::endl;
+			system("pause");
+		}
 		break;
 	case '3':
 		//Null
@@ -351,7 +383,7 @@ void Game::interact(std::string map[7][7], Player player)
 
 	system("cls");
 	std::cout << "What do you want to do?" << std::endl;
-	std::cout << "[1]" << std::endl;
+	std::cout << "[1] Search Room" << std::endl;
 	std::cout << "[2]" << std::endl;
 	std::cout << "[3]" << std::endl;
 	std::cout << " " << std::endl;
@@ -362,7 +394,13 @@ void Game::interact(std::string map[7][7], Player player)
 	switch (answer)
 	{
 	case '1':
-		//Null
+		if (player.m_currentLocation.getItemExist() == true)
+		{
+			std::cout << "You begin to search the room. After sometime, you find: " << std::endl;
+			std::cout << "[1] " << player.m_currentLocation.getItem().getName() << std::endl;
+			std::cout << " " << std::endl;
+
+		}
 		break;
 	case '2':
 		//Null
@@ -387,9 +425,11 @@ void Game::help(std::string map[7][7], Player player)
 	//Display information about how the game works etc.
 	system("cls");
 	std::cout << "What do you want to do?" << std::endl;
-	std::cout << "[1]" << std::endl;
-	std::cout << "[2]" << std::endl;
-	std::cout << "[3]" << std::endl;
+	std::cout << "[1] General" << std::endl;
+	std::cout << "[2] Movement" << std::endl;
+	std::cout << "[3] Combat" << std::endl;
+	std::cout << "[4] Enemies" << std::endl;
+	std::cout << "[5] Items" << std::endl;
 	std::cout << " " << std::endl;
 	std::cout << "[Q] Quit" << std::endl;
 	char answer;
@@ -404,6 +444,12 @@ void Game::help(std::string map[7][7], Player player)
 		//Null
 		break;
 	case '3':
+		//Null
+		break;
+	case '4':
+		//Null
+		break;
+	case '5':
 		//Null
 		break;
 	case 'q':
