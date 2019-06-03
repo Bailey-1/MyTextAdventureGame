@@ -3,11 +3,12 @@
 #include <string>
 #include "Tile.h"
 #include "Player.h"
+#include "ValidItems.h"
 
 class ValidLocations
 {
 protected:
-	
+	ValidItems validItems;
 public:
 	std::string intro;
 	std::string introContinued;

@@ -69,6 +69,7 @@ You have two options. South or West");
 You have two options. North or West.");
 	F.setIsEnemyAlive(false);
 	F.setItemExist(true);
+	F.setItem(validItems.smallSword);
 
 	G.setName("G Room Name");
 	G.setId("G");

@@ -8,6 +8,15 @@
 #include "ValidLocations.h"
 #include "ValidItems.h"
 
+/*
+TODO:
+- Finish the battle bit.
+-- Add option to run back to previous location. / Needs to reset enemy health etc
+- Add Enemy Weapon / damage.
+- Add Inventory / Item stuff like potions. 
+*/
+
+
 void Game::start(void)
 {
 	intro();
@@ -28,7 +37,10 @@ void Game::start(void)
 	std::cout << "What is the name of your hero? ";
 	std::string name;
 	std::cin >> name;
+	system("cls");
 	player.setName(name);
+
+	
 
 	Item items[5];
 	player.inventory.setItems(*items);
@@ -62,9 +74,9 @@ void Game::play(std::string map[7][7], Player player)
 	std::cout << "Location Name: " << player.m_currentLocation.getName() << std::endl;
 	std::cout << "Location Description: " << player.m_currentLocation.getDescription() << std::endl;
 
-	std::cout << "Enemy" << std::endl;
-	std::cout << "IsEnemyAlive " << player.m_currentLocation.getIsEnemyAlive() << std::endl;
-	std::cout << "Enemy " << player.m_currentLocation.getEnemy().getName() << std::endl;
+	//std::cout << "Enemy" << std::endl;
+	//std::cout << "IsEnemyAlive " << player.m_currentLocation.getIsEnemyAlive() << std::endl;
+	//std::cout << "Enemy " << player.m_currentLocation.getEnemy().getName() << std::endl;
 
 	std::cout << " " << std::endl;
 
@@ -77,7 +89,6 @@ void Game::play(std::string map[7][7], Player player)
 			player.m_currentLocation.setIsEnemyAlive(false);
 			std::cout << "Well Done. You killed the "<< player.m_currentLocation.getEnemy().getName() << "."<< std::endl;
 			
-
 			validLocations.A = player.m_currentLocation;
 
 			system("pause");
@@ -153,13 +164,13 @@ void Game::play(std::string map[7][7], Player player)
 			You have to replace every "\" with "\\" for it to ascii to
 			work cause the compiler skips "\" cause like "\n" or something
 		*/
-		
+		std::cout << "======================================================================================================" << std::endl;
 		std::cout << "__  __                 _                       _       __    _                               " << std::endl;
 		std::cout << "\\ \\/ /  ____   __  __ ( )   _____  ___        | |     / /   (_)   ____    ____   ___    _____" << std::endl;
 		std::cout << " \\  /  / __ \\ / / / / |/   / ___/ / _ \\       | | /| / /   / /   / __ \\  / __ \\ / _ \\  / ___/" << std::endl;
 		std::cout << " / /  / /_/ // /_/ /      / /    /  __/       | |/ |/ /   / /   / / / / / / / //  __/ / /    " << std::endl;
 		std::cout << "/_/   \\____/ \\__,_/      /_/     \\___/        |__/|__/   /_/   /_/ /_/ /_/ /_/ \\___/ /_/     " << std::endl;
-
+		std::cout << "======================================================================================================" << std::endl;
 		player.winStats();
 
 		return;
@@ -256,6 +267,10 @@ void Game::playerMove(std::string map[7][7], Player player)
 		player.setX(x);
 		player.setY(y);
 
+		if (player.m_currentLocation.getName() != player.m_prevLocation.getName())
+		{
+			player.m_prevLocation = prevLocation;
+		}
 
 		//Probably a nicer way to do this but idk
 		if (map[player.getY()][player.getX()] == "A")
@@ -323,11 +338,6 @@ void Game::playerMove(std::string map[7][7], Player player)
 			player.m_currentLocation = validLocations.P;
 		}
 		//gross isnt it.
-	}
-
-	if (player.m_currentLocation.getName() != player.m_prevLocation.getName())
-	{
-		player.m_prevLocation = prevLocation;
 	}
 	//std::cout << "You are at " << map[y][x] << std::endl;
 	play(map, player);
@@ -530,10 +540,32 @@ void Game::searchRoom(std::string map[7][7], Player player)
 	std::cout << "Search Room" << std::endl;
 	if (player.m_currentLocation.getItemExist() == true)
 	{
-		std::cout << "You spend a little while looking around the area, when you suddenly find:" << std::endl;
-
+		std::cout << "You spend a little while looking around the area, when you suddenly find:\n" << std::endl;
+		
 		player.m_currentLocation.getItem().stats();
-		system("pause");
+
+		std::cout << "\nDo you want to pickup " << player.m_currentLocation.getItem().getName() << "." << std::endl;
+		std::cout << "[1] Yes" << std::endl;
+		std::cout << "[2] No" << std::endl;
+		int answer;
+		std::cin >> answer;
+		if (answer == 1)
+		{
+			bool isPickedUp = player.inventory.pickupItem(player.m_currentLocation.getItem());
+			
+			if (isPickedUp == true)
+			{
+				std::cout << "The Item has been added to your inventory." << std::endl;
+				player.m_currentLocation.setItemExist(false);
+			}
+			else
+			{
+				std::cout << "Your inventory is full." << std::endl;
+				std::cout << "The item cannot be added to your inventory. Try removing something." << std::endl;
+			}
+			system("pause");
+		}
+
 	}
 	else
 	{
@@ -590,7 +622,9 @@ void Game::help(std::string map[7][7], Player player)
 
 void Game::intro()
 {
+	std::cout << "==================================================" << std::endl;
 	std::cout << "The Beginning:" << std::endl;
+	std::cout << "==================================================" << std::endl;
 	std::cout << validLocations.intro << std::endl;
 	system("pause");
 }

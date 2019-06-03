@@ -158,7 +158,9 @@ bool Player::Battle(Enemy baddie)
 			if (baddie.getHealth() <= 0)
 			{
 				//Either kill or be killed. 
-				std::cout << "isEnemyDead = true" << std::endl;
+				//std::cout << "isEnemyDead = true" << std::endl;
+				std::cout << "Just as " << baddie.getName() << "commits die, he whispers: " << std::endl;
+				std::cout << baddie.getDeathPhrase() << std::endl;
 
 				return true;
 			}

@@ -50,6 +50,6 @@ void Item::stats(void)
 	{
 		std::cout << "Damage: " << m_damage << std::endl;
 	}
-
+	std::cout << "Value: " << m_value << std::endl;
 	std::cout << "==================================================" << std::endl;
 }

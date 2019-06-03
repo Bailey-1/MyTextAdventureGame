@@ -14,7 +14,7 @@ public:
 	void setItems(Item); //Set array of items
 
 	Item getItem(int); //Get item from array location
-	void pickupItem(Item); //Add single item to inventory in next location
+	bool pickupItem(Item); //Add single item to inventory in next location
 
 	void swapItem(int, int);
 	void viewInventory(void);
