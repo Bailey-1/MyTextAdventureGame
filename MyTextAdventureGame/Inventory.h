@@ -10,12 +10,15 @@ protected:
 	int m_size;
 
 public:
-	Item getItems(void);
-	void setItems(Item);
+	Item getItems(void); //Get array of items
+	void setItems(Item); //Set array of items
 
-	Item getItem(int);
-	void pickupItem(Item);
+	Item getItem(int); //Get item from array location
+	void pickupItem(Item); //Add single item to inventory in next location
 
-	int getSize(void);
-	void setSize(int);
+	void swapItem(int, int);
+	void viewInventory(void);
+
+	int getSize(void); //Get max size of inventory
+	void setSize(int); //Set max size of inventory
 };

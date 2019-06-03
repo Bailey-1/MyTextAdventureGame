@@ -5,26 +5,12 @@
 #include "Game.h"
 #include "Player.h"
 #include "Tile.h"
-#include "Locations.h"
+#include "ValidLocations.h"
+#include "ValidItems.h"
 
 void Game::start(void)
 {
 	intro();
-
-	Player player;
-	std::cout << "What is the name of your hero? ";
-	std::string name;
-	std::cin >> name;
-	player.setName(name);
-
-	Item items[5];
-
-	player.inventory.setItems(*items);
-	player.inventory.setSize(0);
-	player.stats();
-
-	std::cout << " " << std::endl;
-	system("pause");
 
 	std::string map[7][7] =
 	{
@@ -36,22 +22,33 @@ void Game::start(void)
 		{" "," ","X"," "," "," ","X"},
 		{"M"," ","N"," ","O"," ","P"}
 	};
+
+	//Player Setup
+	Player player;
+	std::cout << "What is the name of your hero? ";
+	std::string name;
+	std::cin >> name;
+	player.setName(name);
+
+	Item items[5];
+	player.inventory.setItems(*items);
+	player.inventory.setSize(5);
 	
 	player.setX(2);
 	player.setY(2);
 	player.m_currentLocation = validLocations.F;
 
-	//Test
-	Item weapon;
-	weapon.setName("Dagger");
-	weapon.setDamage(1);
+	player.setHealth(100);
+	player.setGold(50);
+	player.setLevel(1);
+	player.setWeapon(validItems.smallKnife);
+	player.setWeapon(validItems.smallKnife);
+	player.inventory.pickupItem(validItems.smallKnife);
 
-	player.inventory.setSize(25);
+	player.stats();
 
-	player.setWeapon(weapon);
-
-	player.inventory.pickupItem(weapon);
-	player.inventory.pickupItem(weapon);
+	std::cout << " " << std::endl;
+	system("pause");
 
 	play(map, player);
 }
@@ -97,12 +94,13 @@ void Game::play(std::string map[7][7], Player player)
 	else
 	{
 		std::cout << "What do you do?" << std::endl;
-
 		std::cout << "[1] Move" << std::endl;
 		std::cout << "[2] Player" << std::endl;
 		std::cout << "[3] Inventory" << std::endl;
 		std::cout << "[4] Interact With Location" << std::endl;
-		std::cout << "[5] Help" << std::endl;
+		std::cout << "[5] Search Room" << std::endl;
+		std::cout << "" << std::endl;
+		std::cout << "[6] Help" << std::endl;
 		std::cout << "Choice: ";
 		std::cin >> answer;
 
@@ -113,16 +111,25 @@ void Game::play(std::string map[7][7], Player player)
 			playerMove(map, player);
 			break;
 		case '2':
+			system("cls");
 			playerOptions(map, player);
 			break;
 		case '3':
+			system("cls");
 			std::cout << "Inventory" << std::endl;
 			inventory(map, player);
 			break;
 		case '4':
+			system("cls");
 			std::cout << "Interact With Location" << std::endl;
+			interact(map, player);
 			break;
 		case '5':
+			system("cls");
+			std::cout << "Search Location" << std::endl;
+			searchRoom(map, player);
+			break;
+		case '6':
 			std::cout << "Help" << std::endl;
 			break;
 
@@ -153,14 +160,10 @@ void Game::play(std::string map[7][7], Player player)
 		std::cout << " / /  / /_/ // /_/ /      / /    /  __/       | |/ |/ /   / /   / / / / / / / //  __/ / /    " << std::endl;
 		std::cout << "/_/   \\____/ \\__,_/      /_/     \\___/        |__/|__/   /_/   /_/ /_/ /_/ /_/ \\___/ /_/     " << std::endl;
 
-		Meme meme;
-		meme.fortnite();
-
 		player.winStats();
 
 		return;
 	}
-
 }
 
 void Game::playerMove(std::string map[7][7], Player player)
@@ -333,7 +336,6 @@ void Game::playerMove(std::string map[7][7], Player player)
 void Game::playerOptions(std::string map[7][7], Player player)
 {
 	std::string newName;
-	system("cls");
 	//Where the player can chose to do things such as view information about them? Maybe remove this?
 	std::cout << "What do you want to do?" << std::endl;
 	std::cout << "[1] View Stats" << std::endl;
@@ -380,7 +382,6 @@ void Game::playerOptions(std::string map[7][7], Player player)
 
 void Game::inventory(std::string map[7][7], Player player)
 {
-	system("cls");
 	//Where the player can chose to do things such as view information about them? Maybe remove this?
 	std::cout << "What do you want to do?" << std::endl;
 	std::cout << "[1] View Inventory" << std::endl;
@@ -399,10 +400,7 @@ void Game::inventory(std::string map[7][7], Player player)
 	{
 	case '1':
 		std::cout << "View Inventory" << std::endl;
-		for (int i = 0; i <= player.inventory.getSize()-1; i++)
-		{
-			std::cout << "[" << i+1 << "] " << player.inventory.getItem(i).getName() <<std::endl;
-		}
+		player.inventory.viewInventory();
 		system("pause");
 		break;
 	case '2':
@@ -413,6 +411,7 @@ void Game::inventory(std::string map[7][7], Player player)
 		}
 		std::cout << "What item do you want to know more about?" << std::endl;
 		std::cin >> itemchoice;
+		itemchoice--; // ARRAYS START AT 0;
 
 		if (player.inventory.getItem(itemchoice).getName() != "")
 		{
@@ -426,7 +425,18 @@ void Game::inventory(std::string map[7][7], Player player)
 		}
 		break;
 	case '3':
-		//Null
+		std::cout << "Move Items" << std::endl;
+		player.inventory.viewInventory();
+
+		std::cout << "First Item: " << std::endl;
+		int fItem;
+		std::cin >> fItem;
+
+		std::cout << "Second Item: " << std::endl;
+		int sItem;
+		std::cin >> sItem;
+
+		player.inventory.swapItem(fItem - 1, sItem - 1);
 
 		break;
 	case '4':
@@ -434,7 +444,27 @@ void Game::inventory(std::string map[7][7], Player player)
 
 		break;
 	case '5':
-		//Null
+		std::cout << "Set Main Weapon" << std::endl;
+		player.inventory.viewInventory();
+
+		std::cout << "Choice: " << std::endl;
+		int weaponChoice;
+		std::cin >> weaponChoice;
+		weaponChoice--; 
+
+		if (player.inventory.getItem(weaponChoice).getType() == "Weapon")
+		{
+			player.setWeapon(player.inventory.getItem(weaponChoice - 1));
+			
+			std::cout << "Successfully Set Main Weapon" << std::endl;
+			system("pause");
+		}
+		else
+		{
+			std::cout << "INVALID CHOICE" << std::endl;
+			std::cout << "Item needs to be type \"Weapon\"" << std::endl;
+			system("pause");
+		}
 
 		break;
 	case 'q':
@@ -491,6 +521,25 @@ void Game::interact(std::string map[7][7], Player player)
 		system("pause");
 		playerOptions(map, player);
 
+	}
+	play(map, player);
+}
+
+void Game::searchRoom(std::string map[7][7], Player player)
+{
+	std::cout << "Search Room" << std::endl;
+	if (player.m_currentLocation.getItemExist() == true)
+	{
+		std::cout << "You spend a little while looking around the area, when you suddenly find:" << std::endl;
+
+		player.m_currentLocation.getItem().stats();
+		system("pause");
+	}
+	else
+	{
+		std::cout << "You were unable to find anything in this room." << std::endl;
+		std::cout << "Maybe theres something good in another?" << std::endl;
+		system("pause");
 	}
 	play(map, player);
 }

@@ -1,16 +1,22 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include "Locations.h"
+#include "ValidLocations.h"
+#include "ValidItems.h"
 #include "Player.h"
 
 //Location for all of the locations details and descriptions.
 //Thought this would be neater and easier to use.
-Locations::Locations(void)
+ValidLocations::ValidLocations(void)
 {
-	intro = "Suddenly, you wake up in the middle of a field. Surrounded by trees. You notice a small brick shed \
-	in the center. Having no choice, You decide to investigate. You quickly realise it is empty apart from a ladder \
-	going down into a dark hole. You decide to investigate further and go down.";
+	intro = "One day you wake up in the middle of a field hundreds of miles from civilisation. For no \
+aparent reason. The field is surrounded by by tall dense trees. You notice a small brick shed \
+in the center. Having no choice, You decide to investigate. You quickly realise it is nearly empty\
+ except from a ladder going down into a dark abyss. You decide to investigate further and go down.";
+
+	introContinued = "As you carefully decend down the ladder, the ground begins to shake and the ladder\
+ suddenly breaks. You tumble to the floor. You now have no choice but to explore. You are armed only with\
+a small knife. Your journey begins. ";
 
 	A.setName("North - West Boss");
 	A.setId("A");
@@ -33,9 +39,9 @@ Locations::Locations(void)
 	C.setName("Room");
 	C.setId("C");
 	C.setDescription("At first, it looks just like any other room. But upon closer inspection, \
-	you notice that there is a mysterious vending machine, selling all sorts of magical items. \
-	You think to yourself, \"Maybe I can use it with these gold coins?\". \
-	You have two options. South or West");
+you notice that there is a mysterious vending machine, selling all sorts of magical items. \
+You think to yourself, \"Maybe I can use it with these gold coins?\". \
+You have two options. South or West");
 	C.setIsEnemyAlive(false);
 
 	D.setName("North - East Boss");
@@ -50,6 +56,7 @@ Locations::Locations(void)
 	EnemyD.setDamage(10);
 	EnemyD.setGold(20);
 	D.setEnemy(EnemyD);
+	
 
 	E.setName("Corridor to the Final Boss");
 	E.setId("E");
@@ -59,8 +66,9 @@ Locations::Locations(void)
 	F.setName("Starter Room");
 	F.setId("F");
 	F.setDescription("This is the first room you step foot in, after going down the ladder. \
-	You have two options. North or West.");
+You have two options. North or West.");
 	F.setIsEnemyAlive(false);
+	F.setItemExist(true);
 
 	G.setName("G Room Name");
 	G.setId("G");
@@ -95,7 +103,7 @@ Locations::Locations(void)
 	M.setName("South - West Boss ");
 	M.setId("M");
 	M.setDescription("The Gnoblin hears you. You're in trouble. You have two option. \
-	North or East. If you can survive...");
+North or East. If you can survive...");
 	M.setIsEnemyAlive(true);
 	Enemy EnemyM;
 	EnemyM.setName("Gnoblin");
@@ -119,7 +127,7 @@ Locations::Locations(void)
 	P.setName("South - East Boss");
 	P.setId("P");
 	P.setDescription("The Gnoblin hears you. You're in trouble. You have one option. West. \
-	If you can survive...");
+If you can survive...");
 	P.setIsEnemyAlive(true);
 	Enemy EnemyP;
 	EnemyP.setName("Gnoblin");
@@ -131,7 +139,7 @@ Locations::Locations(void)
 	P.setEnemy(EnemyP);
 }
 
-void Locations::update(std::string map[7][7], Player player)
+void ValidLocations::update(std::string map[7][7], Player player)
 {
 	if (map[player.getY()][player.getX()] == "A")
 	{

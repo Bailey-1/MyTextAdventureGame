@@ -9,6 +9,8 @@ protected:
 	std::string m_type;
 	std::string m_description;
 
+	int m_value;
+
 	int m_damage;
 	int m_health;
 	float m_xpBonus;
@@ -22,6 +24,9 @@ public:
 	void setDescription(std::string);
 
 	void stats(void);
+
+	int getValue(void);
+	void setValue(int);
 
 	int getDamage(void);
 	void setDamage(int);

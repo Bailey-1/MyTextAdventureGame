@@ -9,6 +9,9 @@ void Item::setType(std::string type) { m_type = type; }
 std::string Item::getDescription(void) { return m_description; }
 void Item::setDescription(std::string description) { m_description = description; }
 
+int Item::getValue(void) { return m_value; }
+void Item::setValue(int value) { m_value = value; }
+
 int Item::getDamage(void) { return m_damage; }
 void Item::setDamage(int damage) { m_damage = damage; }
 
@@ -24,7 +27,15 @@ void Item::stats(void)
 	std::cout << "                   Item Stats:                   " << std::endl;
 	std::cout << "==================================================" << std::endl;
 	std::cout << "Name: " << m_name << std::endl;
-	std::cout << "Description: " << m_description << std::endl;
+	if (m_description == "")
+	{
+		std::cout << "Description: *BLANK*" << std::endl;
+	}
+	else
+	{
+		std::cout << "Description: " << m_description << std::endl;
+	}
+	
 	std::cout << "Type: " << m_type << std::endl;
 
 	if (m_type == "Health")
@@ -40,6 +51,5 @@ void Item::stats(void)
 		std::cout << "Damage: " << m_damage << std::endl;
 	}
 
-	std::cout << "Type: " << getDamage() << std::endl;
 	std::cout << "==================================================" << std::endl;
 }

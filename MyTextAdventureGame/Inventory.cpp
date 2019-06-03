@@ -21,3 +21,18 @@ void Inventory::pickupItem(Item item)
 		}
 	}
 }
+
+void Inventory::swapItem(int a, int b)
+{
+	Item c = m_items[b];
+	m_items[b] = m_items[a];
+	m_items[a] = c;
+}
+
+void Inventory::viewInventory(void)
+{
+	for (int i = 0; i <= m_size - 1; i++)
+	{
+		std::cout << "[" << i + 1 << "] " << m_items[i].getName() << std::endl;
+	}
+}
