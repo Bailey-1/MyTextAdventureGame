@@ -6,7 +6,7 @@
 class Inventory
 {
 protected:
-	Item m_items[5];
+	Item m_items[50];
 	int m_size;
 
 public:

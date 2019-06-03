@@ -12,7 +12,7 @@ void Inventory::setSize(int size) { m_size = size; }
 
 void Inventory::pickupItem(Item item) 
 {
-	for (int i = 0; i <= 4; i++)
+	for (int i = 0; i <= m_size-1; i++)
 	{
 		if (m_items[i].getName() == "")
 		{

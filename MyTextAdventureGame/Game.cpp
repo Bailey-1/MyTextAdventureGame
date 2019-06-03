@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Tile.h"
 #include "Locations.h"
+#include "Meme.h"
 
 void Game::start(void)
 {
@@ -44,7 +45,11 @@ void Game::start(void)
 	//Test
 	Item weapon;
 	weapon.setName("Dagger");
-	weapon.setDamage(10);
+	weapon.setDamage(1);
+
+	player.inventory.setSize(25);
+
+	player.setWeapon(weapon);
 
 	player.inventory.pickupItem(weapon);
 	player.inventory.pickupItem(weapon);
@@ -61,48 +66,107 @@ void Game::play(std::string map[7][7], Player player)
 	std::cout << "Location Name: " << player.m_currentLocation.getName() << std::endl;
 	std::cout << "Location Description: " << player.m_currentLocation.getDescription() << std::endl;
 
+	std::cout << "Enemy" << std::endl;
+	std::cout << "IsEnemyAlive " << player.m_currentLocation.getIsEnemyAlive() << std::endl;
+	std::cout << "Enemy " << player.m_currentLocation.getEnemy().getName() << std::endl;
+
 	std::cout << " " << std::endl;
-	std::cout << "What do you do?" << std::endl;
 
-	std::cout << "[1] Move" << std::endl;
-	std::cout << "[2] Player" << std::endl;
-	std::cout << "[3] Inventory" << std::endl;
-	std::cout << "[4] Interact With Location" << std::endl;
-	std::cout << "[5] Help" << std::endl;
-	std::cout << "Choice: ";
-	std::cin >> answer;
-
-	switch (answer)
+	if (player.m_currentLocation.getIsEnemyAlive() == true)
 	{
-	case '1':
-		system("cls");
-		playerMove(map, player);
-		break;
-	case '2':
-		playerOptions(map, player);
-		break;
-	case '3':
-		std::cout << "Inventory" << std::endl;
-		inventory(map, player);
-		break;
-	case '4':
-		std::cout << "Interact With Location" << std::endl;
-		break;
-	case '5':
-		std::cout << "Help" << std::endl;
-		break;
+		bool isEnemyDead = player.Battle(player.m_currentLocation.getEnemy());
+		
+		if (isEnemyDead == true)
+		{
+			player.m_currentLocation.setIsEnemyAlive(false);
+			std::cout << "Well Done. You killed the "<< player.m_currentLocation.getEnemy().getName() << "."<< std::endl;
+			
 
-	default:
-		std::cout << "INVALID OPTION: Please try again!" << std::endl;
-		system("pause");
+			validLocations.A = player.m_currentLocation;
 
-		play(map, player);
-		break;
+			system("pause");
+			play(map, player);
+		}
+		else
+		{
+			std::cout << "YOU DIED" << std::endl;
+			player.finalStats(player.m_currentLocation.getEnemy());
+			system("pause");
+			return;
+		}
 	}
+	else
+	{
+		std::cout << "What do you do?" << std::endl;
+
+		std::cout << "[1] Move" << std::endl;
+		std::cout << "[2] Player" << std::endl;
+		std::cout << "[3] Inventory" << std::endl;
+		std::cout << "[4] Interact With Location" << std::endl;
+		std::cout << "[5] Help" << std::endl;
+		std::cout << "Choice: ";
+		std::cin >> answer;
+
+		switch (answer)
+		{
+		case '1':
+			system("cls");
+			playerMove(map, player);
+			break;
+		case '2':
+			playerOptions(map, player);
+			break;
+		case '3':
+			std::cout << "Inventory" << std::endl;
+			inventory(map, player);
+			break;
+		case '4':
+			std::cout << "Interact With Location" << std::endl;
+			break;
+		case '5':
+			std::cout << "Help" << std::endl;
+			break;
+
+		default:
+			std::cout << "INVALID OPTION: Please try again!" << std::endl;
+			system("pause");
+
+			play(map, player);
+			break;
+		}
+	}
+
+	if (validLocations.A.getIsEnemyAlive() == false 
+		&& validLocations.D.getIsEnemyAlive() == false
+		&& validLocations.M.getIsEnemyAlive() == false
+		&& validLocations.P.getIsEnemyAlive() == false)
+	{
+		system("cls");
+
+		/*
+			You have to replace every "\" with "\\" for it to ascii to
+			work cause the compiler skips "\" cause like "\n" or something
+		*/
+		
+		std::cout << "__  __                 _                       _       __    _                               " << std::endl;
+		std::cout << "\\ \\/ /  ____   __  __ ( )   _____  ___        | |     / /   (_)   ____    ____   ___    _____" << std::endl;
+		std::cout << " \\  /  / __ \\ / / / / |/   / ___/ / _ \\       | | /| / /   / /   / __ \\  / __ \\ / _ \\  / ___/" << std::endl;
+		std::cout << " / /  / /_/ // /_/ /      / /    /  __/       | |/ |/ /   / /   / / / / / / / //  __/ / /    " << std::endl;
+		std::cout << "/_/   \\____/ \\__,_/      /_/     \\___/        |__/|__/   /_/   /_/ /_/ /_/ /_/ \\___/ /_/     " << std::endl;
+
+		Meme meme;
+		meme.fortnite();
+
+		player.winStats();
+
+		return;
+	}
+
 }
 
 void Game::playerMove(std::string map[7][7], Player player)
 {
+	validLocations.update(map, player);
 	int error = 0;
 	char input;
 
@@ -189,6 +253,7 @@ void Game::playerMove(std::string map[7][7], Player player)
 	{
 		player.setX(x);
 		player.setY(y);
+
 
 		//Probably a nicer way to do this but idk
 		if (map[player.getY()][player.getX()] == "A")
@@ -333,7 +398,7 @@ void Game::inventory(std::string map[7][7], Player player)
 	{
 	case '1':
 		std::cout << "View Inventory" << std::endl;
-		for (int i = 0; i <= 4; i++)
+		for (int i = 0; i <= player.inventory.getSize()-1; i++)
 		{
 			std::cout << "[" << i+1 << "] " << player.inventory.getItem(i).getName() <<std::endl;
 		}

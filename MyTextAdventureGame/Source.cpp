@@ -4,7 +4,7 @@
 
 #include "Game.h"
 #include "Player.h"
-
+#include "Meme.h"
 void leaderboards(void);
 void credits(void);
 
@@ -14,24 +14,6 @@ int main()
 	char answer;
 	bool playGame = true;
 	Game game;
-
-	Player player;
-	player.setName("Dave");
-	player.setHealth(100);
-	player.setGold(0);
-
-	Item sword;
-	sword.setName("Super Sword");
-	sword.setDamage(15);
-
-	player.setWeapon(sword);
-	Enemy baddie;
-	baddie.setName("Test");
-	baddie.setHealth(100);
-	baddie.setGold(5);
-	baddie.setDamage(10);
-
-	bool isBaddieDead;
 
 	while (playGame == true) {
 		std::cout << "==================================================" << std::endl;
@@ -66,9 +48,15 @@ int main()
 			playGame = false;
 			break;
 		case '5':
-			player.setHealth(100);
-			isBaddieDead = player.Battle(baddie);
-			std::cout << "IS THE BADDIE DEAD " << isBaddieDead << std::endl;
+			std::cout << "__  __                 _                       _       __    _                               " << std::endl;
+			std::cout << "\\ \\/ /  ____   __  __ ( )   _____  ___        | |     / /   (_)   ____    ____   ___    _____" << std::endl;
+			std::cout << " \\  /  / __ \\ / / / / |/   / ___/ / _ \\       | | /| / /   / /   / __ \\  / __ \\ / _ \\  / ___/" << std::endl;
+			std::cout << " / /  / /_/ // /_/ /      / /    /  __/       | |/ |/ /   / /   / / / / / / / //  __/ / /    " << std::endl;
+			std::cout << "/_/   \\____/ \\__,_/      /_/     \\___/        |__/|__/   /_/   /_/ /_/ /_/ /_/ \\___/ /_/     " << std::endl;
+
+			Meme meme;
+			meme.fortnite();
+
 			system("pause");
 			break;
 

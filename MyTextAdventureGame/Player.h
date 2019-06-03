@@ -41,7 +41,7 @@ public:
 	int getY(void);
 	void setY(int);
 
-	int Battle(Enemy);
+	bool Battle(Enemy);
 
 	Inventory inventory;
 
@@ -52,6 +52,8 @@ public:
 	Tile m_currentLocation;
 
 	void stats(void);
+	void finalStats(Enemy);
+	void winStats(void);
 
 	Player(void);
 };

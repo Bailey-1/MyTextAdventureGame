@@ -1,8 +1,9 @@
-#include "Player.h"
 #include <iostream>
 #include <string>
 #include <cstdlib>
 #include <ctime>
+
+#include "Player.h"
 
 std::string Player::getName(void) { return m_name; }
 void Player::setName(std::string name) { m_name = name; }
@@ -29,12 +30,44 @@ void Player::stats(void)
 	std::cout << "==================================================" << std::endl;
 	std::cout << "                  Player Stats:                   " << std::endl;
 	std::cout << "==================================================" << std::endl;
-	std::cout << "Name: " << getName() << std::endl;
-	std::cout << "Health: " << getHealth() << std::endl;
-	std::cout << "Gold: " << getGold() << std::endl;
+	std::cout << "Name: " << m_name << std::endl;
+	std::cout << "Health: " << m_health << std::endl;
+	std::cout << "Gold: " << m_gold << std::endl;
 
-	std::cout << "XP: " << getXp() << std::endl;
-	std::cout << "Level: " << getLevel() << std::endl;
+	std::cout << "XP: " << m_xp << std::endl;
+	std::cout << "Level: " << m_level << std::endl;
+	std::cout << "Location: " << m_currentLocation.getName() << std::endl;
+	std::cout << "==================================================" << std::endl;
+}
+
+void Player::finalStats(Enemy killer)
+{
+	std::cout << "==================================================" << std::endl;
+	std::cout << "               Final Player Stats:                " << std::endl;
+	std::cout << "==================================================" << std::endl;
+	std::cout << "Name: " << m_name << std::endl;
+	std::cout << "Health: " << m_health << std::endl;
+	std::cout << "Gold: " << m_gold << std::endl;
+
+	std::cout << "XP: " << m_xp << std::endl;
+	std::cout << "Level: " << m_level << std::endl;
+	std::cout << "Location: " << m_currentLocation.getName() << std::endl;
+	std::cout << "==================================================" << std::endl;
+	std::cout << "Killed By: " << killer.getName() << std::endl;
+	std::cout << killer.getKillPhrase() << std::endl;
+}
+
+void Player::winStats(void)
+{
+	std::cout << "==================================================" << std::endl;
+	std::cout << "                 You're Winner!                   " << std::endl;
+	std::cout << "==================================================" << std::endl;
+	std::cout << "Name: " << m_name << std::endl;
+	std::cout << "Health: " << m_health << std::endl;
+	std::cout << "Gold: " << m_gold << std::endl;
+
+	std::cout << "XP: " << m_xp << std::endl;
+	std::cout << "Level: " << m_level << std::endl;
 	std::cout << "Location: " << m_currentLocation.getName() << std::endl;
 	std::cout << "==================================================" << std::endl;
 }
@@ -47,7 +80,7 @@ Player::Player(void)
 	setLevel(0);
 }
 
-int Player::Battle(Enemy baddie)
+bool Player::Battle(Enemy baddie)
 {
 	int run = 1;
 	std::cout << "==================================================" << std::endl;
@@ -111,7 +144,6 @@ int Player::Battle(Enemy baddie)
 
 				std::cout << dealtDamage << std::endl;
 				baddie.setHealth(baddie.getHealth() - dealtDamage);
-
 				break;
 			case 2:
 				std::cout << "You have chosen to block your opponent." << std::endl;
@@ -125,8 +157,10 @@ int Player::Battle(Enemy baddie)
 
 			if (baddie.getHealth() <= 0)
 			{
-				std::cout << "Baddie Health is Zero" << std::endl;
-				return 1;
+				//Either kill or be killed. 
+				std::cout << "isEnemyDead = true" << std::endl;
+
+				return true;
 			}
 
 			int recievedDamage = rand() % baddie.getDamage();
@@ -150,9 +184,9 @@ int Player::Battle(Enemy baddie)
 
 		if (getHealth() <= 0)
 		{
-			std::cout << "Player Health is zero" << std::endl;
+			std::cout << "isEnemyDead = false" << std::endl;
 
-			return 0;
+			return false;
 		}
 
 		system("pause");
