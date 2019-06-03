@@ -8,7 +8,9 @@
 //Thought this would be neater and easier to use.
 Locations::Locations(void)
 {
-	intro = "Suddenly, you wake up in the middle of a field. Surrounded by trees. You notice a small brick shed in the center. Having no choice, You decide to investigate. You quickly realise it is empty apart from a ladder going down into a dark hole. You decide to investigate further and go down.";
+	intro = "Suddenly, you wake up in the middle of a field. Surrounded by trees. You notice a small brick shed \
+	in the center. Having no choice, You decide to investigate. You quickly realise it is empty apart from a ladder \
+	going down into a dark hole. You decide to investigate further and go down.";
 
 	A.setName("North - West Boss");
 	A.setId("A");
@@ -30,7 +32,10 @@ Locations::Locations(void)
 
 	C.setName("Room");
 	C.setId("C");
-	C.setDescription("At first, it looks just like any other room. But upon closer inspection, you notice that there is a mysterious vending machine, selling all sorts of magical items. You think to yourself, \"Maybe I can use it with these gold coins?\". You have two options. South or West");
+	C.setDescription("At first, it looks just like any other room. But upon closer inspection, \
+	you notice that there is a mysterious vending machine, selling all sorts of magical items. \
+	You think to yourself, \"Maybe I can use it with these gold coins?\". \
+	You have two options. South or West");
 	C.setIsEnemyAlive(false);
 
 	D.setName("North - East Boss");
@@ -53,7 +58,8 @@ Locations::Locations(void)
 
 	F.setName("Starter Room");
 	F.setId("F");
-	F.setDescription("This is the first room you step foot in, after going down the ladder. You have two options. North or West.");
+	F.setDescription("This is the first room you step foot in, after going down the ladder. \
+	You have two options. North or West.");
 	F.setIsEnemyAlive(false);
 
 	G.setName("G Room Name");
@@ -88,7 +94,8 @@ Locations::Locations(void)
 	
 	M.setName("South - West Boss ");
 	M.setId("M");
-	M.setDescription("The Gnoblin hears you. You're in trouble. You have two option. North or East. If you can survive...");
+	M.setDescription("The Gnoblin hears you. You're in trouble. You have two option. \
+	North or East. If you can survive...");
 	M.setIsEnemyAlive(true);
 	Enemy EnemyM;
 	EnemyM.setName("Gnoblin");
@@ -111,7 +118,8 @@ Locations::Locations(void)
 
 	P.setName("South - East Boss");
 	P.setId("P");
-	P.setDescription("The Gnoblin hears you. You're in trouble. You have one option. West. If you can survive...");
+	P.setDescription("The Gnoblin hears you. You're in trouble. You have one option. West. \
+	If you can survive...");
 	P.setIsEnemyAlive(true);
 	Enemy EnemyP;
 	EnemyP.setName("Gnoblin");

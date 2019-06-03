@@ -6,7 +6,6 @@
 #include "Player.h"
 #include "Tile.h"
 #include "Locations.h"
-#include "Meme.h"
 
 void Game::start(void)
 {
@@ -388,6 +387,8 @@ void Game::inventory(std::string map[7][7], Player player)
 	std::cout << "[2] View Information about item" << std::endl;
 	std::cout << "[3] Move items" << std::endl;
 	std::cout << "[4] Remove Item" << std::endl;
+	std::cout << "[5] Set Weapon" << std::endl;
+
 	std::cout << " " << std::endl;
 	std::cout << "[Q] Quit" << std::endl;
 	char answer;
@@ -426,6 +427,15 @@ void Game::inventory(std::string map[7][7], Player player)
 		break;
 	case '3':
 		//Null
+
+		break;
+	case '4':
+		//Null
+
+		break;
+	case '5':
+		//Null
+
 		break;
 	case 'q':
 		break;

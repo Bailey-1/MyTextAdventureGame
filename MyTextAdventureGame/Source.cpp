@@ -4,7 +4,7 @@
 
 #include "Game.h"
 #include "Player.h"
-#include "Meme.h"
+
 void leaderboards(void);
 void credits(void);
 
@@ -53,9 +53,6 @@ int main()
 			std::cout << " \\  /  / __ \\ / / / / |/   / ___/ / _ \\       | | /| / /   / /   / __ \\  / __ \\ / _ \\  / ___/" << std::endl;
 			std::cout << " / /  / /_/ // /_/ /      / /    /  __/       | |/ |/ /   / /   / / / / / / / //  __/ / /    " << std::endl;
 			std::cout << "/_/   \\____/ \\__,_/      /_/     \\___/        |__/|__/   /_/   /_/ /_/ /_/ /_/ \\___/ /_/     " << std::endl;
-
-			Meme meme;
-			meme.fortnite();
 
 			system("pause");
 			break;
