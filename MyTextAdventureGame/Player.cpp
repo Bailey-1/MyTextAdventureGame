@@ -132,6 +132,10 @@ bool Player::Battle(Enemy baddie)
 			std::cout << "==================================================" << std::endl;
 			std::cout << "[1] Attack your opponent." << std::endl;
 			std::cout << "[2] Block your opponent." << std::endl;
+			std::cout << "" << std::endl;
+			std::cout << "[3] Consume Health Potion." << std::endl;
+			std::cout << "[4] Run (Leave the battle and Return to previous room)." << std::endl;
+
 			int userChoice;
 			std::cin >> userChoice;
 
@@ -149,6 +153,30 @@ bool Player::Battle(Enemy baddie)
 				std::cout << "You have chosen to block your opponent." << std::endl;
 				isBlocked = true;
 				break;
+			case 3:
+				std::cout << "Inventory" << std::endl;
+				inventory.viewInventory();
+
+				std::cout << "What item do you want to use?" << std::endl;
+				int itemChoice;
+				std::cin >> itemChoice;
+				itemChoice--;
+				
+				if (inventory.getItem(itemChoice).getType() == "Health")
+				{
+					std::cout << "You have consumed the health potion" << std::endl;
+					m_health += inventory.getItem(itemChoice).getHealth();
+					
+				}
+				else
+				{
+
+				}
+
+				break;
+			case 4:
+				std::cout << "You have chosen to leave the battle." << std::endl;
+				return false;
 
 			default:
 				std::cout << "Invalid Choice" << std::endl;

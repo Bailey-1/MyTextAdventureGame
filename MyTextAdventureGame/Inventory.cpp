@@ -6,6 +6,7 @@ Item Inventory::getItems(void) { return *m_items; }
 void Inventory::setItems(Item itemArray) { *m_items = itemArray; }
 
 Item Inventory::getItem(int i) { return m_items[i]; }
+void Inventory::removeItem(int i) { m_items[i] = Item(); }
 
 int Inventory::getSize(void) { return m_size; }
 void Inventory::setSize(int size) { m_size = size; }

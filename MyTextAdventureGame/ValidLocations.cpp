@@ -24,11 +24,12 @@ a small knife. Your journey begins. ";
 	A.setIsEnemyAlive(true);
 	Enemy EnemyA;
 	EnemyA.setName("Gnoblin");
-	EnemyA.setPhrase("I'm gnot a Gnelf, I'm gnot a Gnoblin, I'm a Gnome.");
+	EnemyA.setPhrase("I'm gnot a Gnelf, I'm gnot a Gnelf, I'm a Gnome.");
 	EnemyA.setKillPhrase("You've been Gnomed!");
 	EnemyA.setDeathPhrase("I've been gnomed!");
 	EnemyA.setDamage(20);
 	EnemyA.setGold(25);
+	EnemyA.setWeapon(validItems.gnoblinWeapon);
 	A.setEnemy(EnemyA);
 
 	B.setName("Room");
@@ -55,6 +56,7 @@ You have two options. South or West");
 	EnemyD.setDeathPhrase("I've been Gnelfed!");
 	EnemyD.setDamage(10);
 	EnemyD.setGold(20);
+	EnemyD.setWeapon(validItems.gnelfWeapon);
 	D.setEnemy(EnemyD);
 	
 
@@ -107,12 +109,13 @@ You have two options. North or West.");
 North or East. If you can survive...");
 	M.setIsEnemyAlive(true);
 	Enemy EnemyM;
-	EnemyM.setName("Gnoblin");
-	EnemyM.setPhrase("I'm gnot a Gnelf, I'm gnot a Gnoblin, I'm a Gnoblin.");
+	EnemyM.setName("Gnome");
+	EnemyM.setPhrase("I'm gnot a Gnelf, I'm gnot a Gnome, I'm a Gnoblin.");
 	EnemyM.setKillPhrase("You've been Gnoblined!");
 	EnemyM.setDeathPhrase("I've been Gnoblined!");
 	EnemyM.setDamage(15);
 	EnemyM.setGold(15);
+	EnemyM.setWeapon(validItems.gnomeWeapon);
 	M.setEnemy(EnemyM);
 
 	N.setName("N Room Name");
@@ -131,12 +134,13 @@ North or East. If you can survive...");
 If you can survive...");
 	P.setIsEnemyAlive(true);
 	Enemy EnemyP;
-	EnemyP.setName("Gnoblin");
+	EnemyP.setName("Gnome");
 	EnemyP.setPhrase("I'm gnot a Gnelf, I'm gnot a Gnoblin, I'm a Gnoblin.");
 	EnemyP.setKillPhrase("You've been Gnoblined!");
 	EnemyP.setDeathPhrase("I've been Gnoblined!");
 	EnemyP.setDamage(15);
 	EnemyP.setGold(15);
+	EnemyP.setWeapon(validItems.gnomeWeapon);
 	P.setEnemy(EnemyP);
 }
 

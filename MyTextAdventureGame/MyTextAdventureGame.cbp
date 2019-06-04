@@ -91,6 +91,8 @@
 		<Unit filename="Enemy.h" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.h" />
+		<Unit filename="Inventory.cpp" />
+		<Unit filename="Inventory.h" />
 		<Unit filename="Item.cpp" />
 		<Unit filename="Item.h" />
 		<Unit filename="Meme.cpp" />
@@ -100,6 +102,10 @@
 		<Unit filename="Source.cpp" />
 		<Unit filename="Tile.cpp" />
 		<Unit filename="Tile.h" />
+		<Unit filename="ValidItems.cpp" />
+		<Unit filename="ValidItems.h" />
+		<Unit filename="ValidLocations.cpp" />
+		<Unit filename="ValidLocations.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

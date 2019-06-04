@@ -50,4 +50,19 @@ when you were transported here.");
 	largeHealth.setType("Health");
 	largeHealth.setHealth(100);
 	smallHealth.setValue(100);
+
+	gnoblinWeapon.setName("Gnoblin's Sword");
+	gnoblinWeapon.setDescription("A standard sword that the Gnoblin likes.");
+	gnoblinWeapon.setType("Weapon");
+	gnoblinWeapon.setDamage(30);
+
+	gnelfWeapon.setName("Gnelf Weapon");
+	gnelfWeapon.setDescription("A standard sword that the Gnelf likes.");
+	gnelfWeapon.setType("Weapon");
+	gnelfWeapon.setDamage(15);
+
+	gnomeWeapon.setName("Gnome Weapon");
+	gnomeWeapon.setDescription("A standard sword that the Gnome likes.");
+	gnomeWeapon.setType("Weapon");
+	gnomeWeapon.setDamage(20);
 }

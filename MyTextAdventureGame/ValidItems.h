@@ -18,4 +18,8 @@ public:
 	Item smallHealth;
 	Item mediumHealth;
 	Item largeHealth;
+
+	Item gnoblinWeapon;
+	Item gnelfWeapon;
+	Item gnomeWeapon;
 };

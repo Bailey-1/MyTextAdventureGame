@@ -12,7 +12,6 @@
 TODO:
 - Finish the battle bit.
 -- Add option to run back to previous location. / Needs to reset enemy health etc
-- Add Enemy Weapon / damage.
 - Add Inventory / Item stuff like potions. 
 */
 
@@ -39,8 +38,6 @@ void Game::start(void)
 	std::cin >> name;
 	system("cls");
 	player.setName(name);
-
-	
 
 	Item items[5];
 	player.inventory.setItems(*items);

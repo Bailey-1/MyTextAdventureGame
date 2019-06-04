@@ -1,57 +1,111 @@
 # depslib dependency file v1.0
-1558437436 source:f:\mytextadventuregame\mytextadventuregame\enemy.cpp
+1558730266 source:f:\mytextadventuregame\mytextadventuregame\enemy.cpp
 	"Enemy.h"
 	<iostream>
 	<string>
 
-1558437438 f:\mytextadventuregame\mytextadventuregame\enemy.h
+1558730173 f:\mytextadventuregame\mytextadventuregame\enemy.h
 	<iostream>
 	<string>
-	"Tile.h"
 	"Item.h"
 
-1558454007 f:\mytextadventuregame\mytextadventuregame\tile.h
+1558642910 f:\mytextadventuregame\mytextadventuregame\tile.h
+	<iostream>
+	<string>
+	"Enemy.h"
+	"Item.h"
+
+1559596105 f:\mytextadventuregame\mytextadventuregame\item.h
 	<iostream>
 	<string>
 
-1556911930 f:\mytextadventuregame\mytextadventuregame\item.h
-	<iostream>
-	<string>
-
-1556911979 source:f:\mytextadventuregame\mytextadventuregame\item.cpp
+1559599217 source:f:\mytextadventuregame\mytextadventuregame\item.cpp
 	"Item.h"
 	<iostream>
 	<string>
 
-1550488693 source:f:\mytextadventuregame\mytextadventuregame\meme.cpp
+1559575466 source:f:\mytextadventuregame\mytextadventuregame\meme.cpp
+	<iostream>
+	<string>
 
-1558455163 source:f:\mytextadventuregame\mytextadventuregame\player.cpp
-	"Player.h"
+1559601841 source:f:\mytextadventuregame\mytextadventuregame\player.cpp
 	<iostream>
 	<string>
 	<cstdlib>
 	<ctime>
+	"Player.h"
 
-1558443319 f:\mytextadventuregame\mytextadventuregame\player.h
+1559572643 f:\mytextadventuregame\mytextadventuregame\player.h
 	<iostream>
 	<string>
 	"Tile.h"
 	"Item.h"
 	"Enemy.h"
+	"Inventory.h"
 
-1558461759 source:f:\mytextadventuregame\mytextadventuregame\source.cpp
+1559575491 source:f:\mytextadventuregame\mytextadventuregame\source.cpp
 	<cstdlib>
 	<iostream>
 	<string>
 	"Game.h"
 	"Player.h"
 
-1558003087 f:\mytextadventuregame\mytextadventuregame\game.h
+1559599624 f:\mytextadventuregame\mytextadventuregame\game.h
 	<iostream>
 	<string>
+	"Player.h"
+	"ValidLocations.h"
+	"ValidItems.h"
 
-1557830847 source:f:\mytextadventuregame\mytextadventuregame\tile.cpp
+1558729755 source:f:\mytextadventuregame\mytextadventuregame\tile.cpp
 	"Tile.h"
 	<iostream>
 	<string>
+
+1559602327 source:f:\mytextadventuregame\mytextadventuregame\game.cpp
+	<cstdlib>
+	<iostream>
+	<string>
+	"Game.h"
+	"Player.h"
+	"Tile.h"
+	"ValidLocations.h"
+	"ValidItems.h"
+
+1559598794 f:\mytextadventuregame\mytextadventuregame\inventory.h
+	<iostream>
+	<string>
+	"Item.h"
+
+1559599153 f:\mytextadventuregame\mytextadventuregame\validlocations.h
+	<iostream>
+	<string>
+	"Tile.h"
+	"Player.h"
+	"ValidItems.h"
+
+1559596345 f:\mytextadventuregame\mytextadventuregame\validitems.h
+	<iostream>
+	<string>
+	"Item.h"
+
+1559598818 source:f:\mytextadventuregame\mytextadventuregame\inventory.cpp
+	"Inventory.h"
+	<iostream>
+	<string>
+
+1559596671 source:f:\mytextadventuregame\mytextadventuregame\validitems.cpp
+	<iostream>
+	<string>
+	<cstdlib>
+	"ValidItems.h"
+	"Player.h"
+
+1559599164 source:f:\mytextadventuregame\mytextadventuregame\validlocations.cpp
+	<iostream>
+	<string>
+	<cstdlib>
+	"ValidLocations.h"
+	"ValidItems.h"
+	"Player.h"
 
