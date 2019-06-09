@@ -38,3 +38,8 @@ void Inventory::viewInventory(void)
 		std::cout << "[" << i + 1 << "] " << m_items[i].getName() << std::endl;
 	}
 }
+
+Inventory::~Inventory(void)
+{
+	
+}

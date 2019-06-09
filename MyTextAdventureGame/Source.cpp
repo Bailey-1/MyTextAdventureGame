@@ -8,6 +8,15 @@
 void leaderboards(void);
 void credits(void);
 
+/* Game:
+The game currently has:
+- A working 2D array map which limits which directions you can travel from each location on the map.
+- A working inventory system which allows you to pickup items and store them in the inventory.
+- A random battle system which allows you to battle a enemy.
+- Win and Lose conditions. 
+- Item system with types and different variables for each one. like weapon, health and xp.
+*/
+
 int main()
 {
 	//Define stuff
@@ -48,11 +57,8 @@ int main()
 			playGame = false;
 			break;
 		case '5':
-			std::cout << "__  __                 _                       _       __    _                               " << std::endl;
-			std::cout << "\\ \\/ /  ____   __  __ ( )   _____  ___        | |     / /   (_)   ____    ____   ___    _____" << std::endl;
-			std::cout << " \\  /  / __ \\ / / / / |/   / ___/ / _ \\       | | /| / /   / /   / __ \\  / __ \\ / _ \\  / ___/" << std::endl;
-			std::cout << " / /  / /_/ // /_/ /      / /    /  __/       | |/ |/ /   / /   / / / / / / / //  __/ / /    " << std::endl;
-			std::cout << "/_/   \\____/ \\__,_/      /_/     \\___/        |__/|__/   /_/   /_/ /_/ /_/ /_/ \\___/ /_/     " << std::endl;
+			//the spellings a joke btw
+			std::cout << "Nothing here" << std::endl;
 
 			system("pause");
 			break;

@@ -15,6 +15,11 @@ TODO:
 - Add Inventory / Item stuff like potions. 
 */
 
+/*
+Destructors:
+I havent really used any destructors since I only use stack objects and not heap objects and these automatically get cleared
+when it goes out of scope without any issues.
+*/
 
 void Game::start(void)
 {
@@ -79,9 +84,9 @@ void Game::play(std::string map[7][7], Player player)
 
 	if (player.m_currentLocation.getIsEnemyAlive() == true)
 	{
-		bool isEnemyDead = player.Battle(player.m_currentLocation.getEnemy());
+		std::string result = player.Battle(player.m_currentLocation.getEnemy());
 		
-		if (isEnemyDead == true)
+		if (result == "winner")
 		{
 			player.m_currentLocation.setIsEnemyAlive(false);
 			std::cout << "Well Done. You killed the "<< player.m_currentLocation.getEnemy().getName() << "."<< std::endl;
@@ -91,12 +96,25 @@ void Game::play(std::string map[7][7], Player player)
 			system("pause");
 			play(map, player);
 		}
-		else
+		else if (result == "loser")
 		{
+			system("cls");
 			std::cout << "YOU DIED" << std::endl;
+			player.setHealth(0);
 			player.finalStats(player.m_currentLocation.getEnemy());
 			system("pause");
 			return;
+		}
+		else
+		{
+			//Not working
+			/*
+			std::cout << "You have chosen to leave the battle" << std::endl;
+			std::cout << "You may face this foe another day." << std::endl;
+			player.m_currentLocation = player.m_prevLocation;
+			player.m_prevLocation;
+			play(map, player);
+			*/
 		}
 	}
 	else
@@ -139,6 +157,7 @@ void Game::play(std::string map[7][7], Player player)
 			break;
 		case '6':
 			std::cout << "Help" << std::endl;
+			play(map, player);
 			break;
 
 		default:
@@ -261,12 +280,17 @@ void Game::playerMove(std::string map[7][7], Player player)
 	}
 	else
 	{
+		prevLocation.x = player.m_currentLocation.x;
+		prevLocation.y = player.m_currentLocation.y;
+
 		player.setX(x);
 		player.setY(y);
 
 		if (player.m_currentLocation.getName() != player.m_prevLocation.getName())
 		{
 			player.m_prevLocation = prevLocation;
+			player.m_prevLocation.x = prevLocation.x;
+			player.m_prevLocation.y = prevLocation.y;
 		}
 
 		//Probably a nicer way to do this but idk
@@ -337,13 +361,15 @@ void Game::playerMove(std::string map[7][7], Player player)
 		//gross isnt it.
 	}
 	//std::cout << "You are at " << map[y][x] << std::endl;
+	player.m_currentLocation.x = x;
+	player.m_currentLocation.y = y;
 	play(map, player);
 }
 
 void Game::playerOptions(std::string map[7][7], Player player)
 {
 	std::string newName;
-	//Where the player can chose to do things such as view information about them? Maybe remove this?
+	//Where the player can chose to do things such as view information about them? Maybe remove this? idk
 	std::cout << "What do you want to do?" << std::endl;
 	std::cout << "[1] View Stats" << std::endl;
 	std::cout << "[2] Change Name" << std::endl;

@@ -23,4 +23,6 @@ public:
 
 	int getSize(void); //Get max size of inventory
 	void setSize(int); //Set max size of inventory
+
+	~Inventory(void);
 };

@@ -36,5 +36,10 @@ public:
 
 	Tile(void);
 	Tile(std::string, std::string, std::string);
+
+	int x;
+	int y;
+
+	~Tile(void);
 };
 

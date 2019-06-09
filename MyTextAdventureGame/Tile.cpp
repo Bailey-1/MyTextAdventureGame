@@ -19,12 +19,20 @@ void Tile::setItem(Item item) { m_item = item; }
 bool Tile::getItemExist(void) { return m_doesItemExist; }
 void Tile::setItemExist(bool doesItemExist) { m_doesItemExist = doesItemExist; }
 
-Tile::Tile(void) {
-	//Null
+Tile::Tile(void)
+{
+	
 }
 
-Tile::Tile(std::string id, std::string name, std::string description) {
+Tile::Tile(std::string id, std::string name, std::string description)
+{
 	setId(id);
 	setName(name);
 	setDescription(description);
+}
+
+Tile::~Tile(void)
+{
+	//std::cout << "Tile Deconstructor Called" << std::endl;
+	//delete m_enemy;
 }

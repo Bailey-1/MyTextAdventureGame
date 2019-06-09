@@ -80,7 +80,7 @@ Player::Player(void)
 	setLevel(0);
 }
 
-bool Player::Battle(Enemy baddie)
+std::string Player::Battle(Enemy baddie)
 {
 	int run = 1;
 	std::cout << "==================================================" << std::endl;
@@ -134,7 +134,8 @@ bool Player::Battle(Enemy baddie)
 			std::cout << "[2] Block your opponent." << std::endl;
 			std::cout << "" << std::endl;
 			std::cout << "[3] Consume Health Potion." << std::endl;
-			std::cout << "[4] Run (Leave the battle and Return to previous room)." << std::endl;
+			std::cout << "" << std::endl;
+			//std::cout << "[4] Run (Leave the battle and Return to previous room)." << std::endl;
 
 			int userChoice;
 			std::cin >> userChoice;
@@ -157,6 +158,8 @@ bool Player::Battle(Enemy baddie)
 				std::cout << "Inventory" << std::endl;
 				inventory.viewInventory();
 
+				std::cout << "Pick wisely as you cannot afford to make a mistake in battle." << std::endl;
+
 				std::cout << "What item do you want to use?" << std::endl;
 				int itemChoice;
 				std::cin >> itemChoice;
@@ -166,17 +169,20 @@ bool Player::Battle(Enemy baddie)
 				{
 					std::cout << "You have consumed the health potion" << std::endl;
 					m_health += inventory.getItem(itemChoice).getHealth();
-					
+					inventory.removeItem(itemChoice); //removes health item from inventory after consumption.
+
+					stats();
 				}
 				else
 				{
-
+					std::cout << "Invalid Option - This has cost you a round." << std::endl;
 				}
 
 				break;
 			case 4:
 				std::cout << "You have chosen to leave the battle." << std::endl;
-				return false;
+				
+				return "leave";
 
 			default:
 				std::cout << "Invalid Choice" << std::endl;
@@ -190,7 +196,7 @@ bool Player::Battle(Enemy baddie)
 				std::cout << "Just as " << baddie.getName() << "commits die, he whispers: " << std::endl;
 				std::cout << baddie.getDeathPhrase() << std::endl;
 
-				return true;
+				return "winner";
 			}
 
 			int recievedDamage = rand() % baddie.getDamage();
@@ -209,14 +215,15 @@ bool Player::Battle(Enemy baddie)
 		}
 		else
 		{
+			//Never gonna get here.
 			std::cout << "You opponent will go first" << std::endl;
 		}
 
 		if (getHealth() <= 0)
 		{
-			std::cout << "isEnemyDead = false" << std::endl;
+			//std::cout << "isEnemyDead = false" << std::endl;
 
-			return false;
+			return "loser";
 		}
 
 		system("pause");

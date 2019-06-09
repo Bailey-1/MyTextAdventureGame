@@ -41,7 +41,7 @@ public:
 	int getY(void);
 	void setY(int);
 
-	bool Battle(Enemy);
+	std::string Battle(Enemy);
 
 	Inventory inventory;
 

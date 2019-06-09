@@ -36,6 +36,8 @@ a small knife. Your journey begins. ";
 	B.setId("B");
 	B.setDescription("Just a eerie room. You have two options. East or South.");
 	B.setIsEnemyAlive(false);
+	B.setItem(validItems.mediumHealth);
+	B.setItemExist(true);
 
 	C.setName("Room");
 	C.setId("C");
@@ -60,7 +62,7 @@ You have two options. South or West");
 	D.setEnemy(EnemyD);
 	
 
-	E.setName("Corridor to the Final Boss");
+	E.setName("Corridor to a Boss");
 	E.setId("E");
 	E.setDescription("Corridor to the North - West Boss. You have two options. North (Boss) or South.");
 	E.setIsEnemyAlive(false);
@@ -152,7 +154,7 @@ void ValidLocations::update(std::string map[7][7], Player player)
 	}
 	else if (map[player.getY()][player.getX()] == "B")
 	{
-		D = player.m_currentLocation;
+		B = player.m_currentLocation;
 	}
 	else if (map[player.getY()][player.getX()] == "C")
 	{
